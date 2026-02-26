@@ -1196,21 +1196,23 @@ After creating dataset → first step in ML is:
 **Always inspect your data before touching the model.**
 
 
-Excellent Tapu 🚀
-Now we move to Data Inspection in Pandas — this is the FIRST thing you do after loading any dataset in AI/ML.
+> Excellent Tapu 🚀
+> Now we move to Data Inspection in Pandas — this is the FIRST thing you do after loading any dataset in AI/ML.
 
-In real ML workflow:
+> In real ML workflow:
 
-Load Data → Inspect Data → Clean Data → Feature Engineering → Model
+> Load Data → Inspect Data → Clean Data → Feature Engineering → Model
 
-Today we master the Inspect Data part deeply.
+> Today we master the Inspect Data part deeply.
 
-📊 We Will Use a Sample ML Dataset
+# 📊 We Will Use a Sample ML Dataset
 
-Let’s create a realistic dataset:
-
+> Let’s create a realistic dataset:
+```
 import pandas as pd
-
+```
+---
+```
 data = {
 "Name": ["Aman", "Riya", "John", "Priya", "Karan", "Rohit", "Anita"],
 "Age": [22, 21, 23, 24, 22, 25, 21],
@@ -1218,50 +1220,61 @@ data = {
 "Department": ["IT", "HR", "IT", "Finance", "IT", "Finance", "HR"],
 "Experience": [1, 2, 2, 3, 1, 4, 2]
 }
-
+```
+---
+```
 df = pd.DataFrame(data)
-1️⃣ .head()
+```
+## 1️⃣ .head()
 🔹 Purpose
 
-Shows first 5 rows by default.
-
+> Shows first 5 rows by default.
+```
 df.head()
+```
 ✅ Output
+```
 Name  Age  Salary Department  Experience
 0   Aman   22   25000         IT           1
 1   Riya   21   27000         HR           2
 2   John   23   30000         IT           2
 3  Priya   24   32000    Finance           3
 4  Karan   22   25000         IT           1
+```
 🔹 Custom Rows
+```
 df.head(3)
-🔥 Why Important in ML?
+```
+## 🔥 Why Important in ML?
 
-Quick preview
+- Quick preview
 
-Detect wrong columns
+- Detect wrong columns
 
-Detect wrong delimiter
+- Detect wrong delimiter
 
-Detect missing values visually
+- Detect missing values visually
 
-2️⃣ .tail()
+## 2️⃣ .tail()
 
-Shows last 5 rows.
-
+> Shows last 5 rows.
+```
 df.tail()
+```
 Output
+```
 Name  Age  Salary Department  Experience
 2   John   23   30000         IT           2
 3  Priya   24   32000    Finance           3
 4  Karan   22   25000         IT           1
 5  Rohit   25   35000    Finance           4
 6  Anita   21   27000         HR           2
-🔥 Why Important?
+```
+## 🔥 Why Important?
 
-Sometimes dataset sorted by date → last rows contain latest records.
+> Sometimes dataset sorted by date → last rows contain latest records.
 
-3️⃣ .info()
+## 3️⃣ .info()
 
 This is VERY IMPORTANT for ML.
 
