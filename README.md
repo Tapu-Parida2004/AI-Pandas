@@ -1196,3 +1196,283 @@ After creating dataset → first step in ML is:
 **Always inspect your data before touching the model.**
 
 
+Excellent Tapu 🚀
+Now we move to Data Inspection in Pandas — this is the FIRST thing you do after loading any dataset in AI/ML.
+
+In real ML workflow:
+
+Load Data → Inspect Data → Clean Data → Feature Engineering → Model
+
+Today we master the Inspect Data part deeply.
+
+📊 We Will Use a Sample ML Dataset
+
+Let’s create a realistic dataset:
+
+import pandas as pd
+
+data = {
+"Name": ["Aman", "Riya", "John", "Priya", "Karan", "Rohit", "Anita"],
+"Age": [22, 21, 23, 24, 22, 25, 21],
+"Salary": [25000, 27000, 30000, 32000, 25000, 35000, 27000],
+"Department": ["IT", "HR", "IT", "Finance", "IT", "Finance", "HR"],
+"Experience": [1, 2, 2, 3, 1, 4, 2]
+}
+
+df = pd.DataFrame(data)
+1️⃣ .head()
+🔹 Purpose
+
+Shows first 5 rows by default.
+
+df.head()
+✅ Output
+Name  Age  Salary Department  Experience
+0   Aman   22   25000         IT           1
+1   Riya   21   27000         HR           2
+2   John   23   30000         IT           2
+3  Priya   24   32000    Finance           3
+4  Karan   22   25000         IT           1
+🔹 Custom Rows
+df.head(3)
+🔥 Why Important in ML?
+
+Quick preview
+
+Detect wrong columns
+
+Detect wrong delimiter
+
+Detect missing values visually
+
+2️⃣ .tail()
+
+Shows last 5 rows.
+
+df.tail()
+Output
+Name  Age  Salary Department  Experience
+2   John   23   30000         IT           2
+3  Priya   24   32000    Finance           3
+4  Karan   22   25000         IT           1
+5  Rohit   25   35000    Finance           4
+6  Anita   21   27000         HR           2
+🔥 Why Important?
+
+Sometimes dataset sorted by date → last rows contain latest records.
+
+3️⃣ .info()
+
+This is VERY IMPORTANT for ML.
+
+df.info()
+Output
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 7 entries, 0 to 6
+Data columns (total 5 columns):
+
+Column       Non-Null Count  Dtype
+
+
+---
+
+0   Name         7 non-null      object
+1   Age          7 non-null      int64
+2   Salary       7 non-null      int64
+3   Department   7 non-null      object
+4   Experience   7 non-null      int64
+🔥 What It Tells You
+Info	Meaning
+Total rows	7
+Columns	5
+Missing values	Check non-null
+Data types	int, object
+🔥 Why Critical in ML?
+
+Models cannot handle object type directly
+
+Missing values must be handled
+
+Memory usage awareness
+
+4️⃣ .describe()
+
+Shows statistical summary of numeric columns.
+
+df.describe()
+Output
+Age        Salary   Experience
+count   7.000000      7.000000     7.000000
+mean   22.571429  28714.285714     2.142857
+std     1.511858   3686.122312     1.069045
+min    21.000000  25000.000000     1.000000
+25%    21.500000  26000.000000     1.500000
+50%    22.000000  27000.000000     2.000000
+75%    23.500000  31000.000000     2.500000
+max    25.000000  35000.000000     4.000000
+🔥 Important ML Use
+
+Detect outliers
+
+Check skewness
+
+Feature scaling decision
+
+Compare min/max
+
+🔹 Include categorical summary
+df.describe(include='object')
+5️⃣ .shape
+
+Gives dataset dimensions.
+
+df.shape
+
+Output:
+
+(7, 5)
+
+Meaning:
+
+7 rows
+
+5 columns
+
+🔥 ML Use
+rows, cols = df.shape
+
+Helps understand dataset size.
+
+6️⃣ .columns
+
+Returns column names.
+
+df.columns
+
+Output:
+
+Index(['Name', 'Age', 'Salary', 'Department', 'Experience'], dtype='object')
+Convert to list
+list(df.columns)
+7️⃣ .dtypes
+
+Shows data type of each column.
+
+df.dtypes
+
+Output:
+
+Name          object
+Age            int64
+Salary         int64
+Department    object
+Experience     int64
+dtype: object
+🔥 Important for ML
+
+If you see:
+
+object → need encoding
+
+datetime → need conversion
+
+category → memory optimized
+
+8️⃣ .value_counts()
+
+Counts frequency of unique values.
+
+Example:
+
+df["Department"].value_counts()
+
+Output:
+
+IT         3
+HR         2
+Finance    2
+🔥 ML Use
+
+Class imbalance detection
+
+Feature distribution check
+
+Example:
+
+df["Age"].value_counts()
+9️⃣ .unique()
+
+Returns unique values.
+
+df["Department"].unique()
+
+Output:
+
+array(['IT', 'HR', 'Finance'], dtype=object)
+🔥 ML Use
+
+Find categories
+
+Prepare encoding
+
+Detect spelling mistakes
+
+🔥 Visual Understanding Diagram
+Dataset Inspection Flow
+
+df.head()     → Preview
+df.info()     → Structure + Missing
+df.describe() → Statistics
+df.shape      → Size
+df.dtypes     → Data types
+df.value_counts() → Distribution
+df.unique()   → Categories
+🔥 Real ML Interview Question
+
+If interviewer gives dataset:
+
+First thing you do?
+
+Answer:
+
+df.head()
+df.info()
+df.describe()
+
+Explain why.
+
+🔥 Common Beginner Mistakes
+
+❌ Ignoring object dtype
+❌ Not checking missing values
+❌ Ignoring class imbalance
+❌ Not checking dataset size
+
+🚀 Summary Table
+Method	Purpose
+head()	First rows
+tail()	Last rows
+info()	Structure
+describe()	Statistics
+shape	Size
+columns	Column names
+dtypes	Data types
+value_counts()	Frequency
+unique()	Unique values
+🔥 Next Level (Very Important)
+
+Now we move to:
+
+👉 Data Selection & Filtering
+
+Selecting columns
+
+Selecting rows
+
+loc
+
+iloc
+
+Boolean indexing
+
+Provide such way like eariler    mean last output like
