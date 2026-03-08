@@ -2305,126 +2305,145 @@ Output
 Important Rule
 
 Single bracket:
-
+```
 df["Name"] → Series
-
+```
 Double bracket:
-
+```
 df[["Name"]] → DataFrame
-3️⃣ Row Selection
+```
+## 3️⃣ Row Selection
 
 Rows can be selected using index position.
 
 Example
+```
 print(df[0:2])
+```
 Output
+```
    Name  Age  Score
 0  Aman   22     88
 1  Riya   21     92
+```
 Explanation
+```
 0:2
-
+```
 Means:
-
+```
 Start → index 0
 End → index 2 (excluded)
-4️⃣ .loc[] – Label Based Selection
+```
+## 4️⃣ .loc[] – Label Based Selection
 
 .loc[] selects data using row labels and column names.
 
-Syntax
+## Syntax
+```
 df.loc[row_label, column_label]
+```
 Example 1: Select Row
+```
 print(df.loc[1])
-
-Output
-
+```
+## Output
+``
 Name     Riya
 Age        21
 Score      92
 Name: 1, dtype: object
 Example 2: Select Row + Column
 print(df.loc[1, "Name"])
-
-Output
-
+``
+## Output
+```
 Riya
 Example 3: Multiple Rows
 print(df.loc[0:1])
-
-Output
-
+```
+## Output
+```
    Name  Age  Score
 0  Aman   22     88
 1  Riya   21     92
-5️⃣ .iloc[] – Position Based Selection
+```
+## 5️⃣ .iloc[] – Position Based Selection
 
 .iloc[] selects data based on integer position.
 
-Syntax
+## Syntax
+```
 df.iloc[row_position, column_position]
 Example 1: Select Row
 print(df.iloc[1])
-
-Output
-
+```
+## Output
+```
 Name     Riya
 Age        21
 Score      92
 Name: 1, dtype: object
-Example 2: Select Specific Value
+```
+## Example 2: Select Specific Value
+```
 print(df.iloc[1,0])
-
+```
 Output
-
+```
 Riya
-Example 3: Select Multiple Rows
+```
+## Example 3: Select Multiple Rows
+```
 print(df.iloc[0:2])
-
+```
 Output
-
+```
    Name  Age  Score
 0  Aman   22     88
 1  Riya   21     92
-🧠 .loc[] vs .iloc[]
+```
+## 🧠 .loc[] vs .iloc[]
 Feature	.loc[]	.iloc[]
 Selection Type	Label based	Position based
 Index Type	Row/Column names	Integer index
 Inclusive Range	Yes	No
 Usage	Named data	Numerical position
-📊 Visual Explanation
+## 📊 Visual Explanation
 
-Dataset:
-
+## Dataset:
+```
 Index   Name   Age   Score
 0       Aman   22    88
 1       Riya   21    92
 2       John   23    85
-
-Examples:
-
+```
+## Examples:
+```
 df.loc[1]
-
+```
 Returns
-
+```
 Riya row
+```
+```
 df.iloc[1]
-
+```
 Returns
 
 Row at position 1
-🤖 Machine Learning Example
+## 🤖 Machine Learning Example
 
 Typical ML dataset:
-
+```
 Age   Salary   Purchased
 22    25000       0
 35    60000       1
-
+````
 Selecting features (X):
-
+```
 X = df[["Age", "Salary"]]
-
+```
 Selecting target variable (y):
 
 y = df["Purchased"]
@@ -2432,45 +2451,48 @@ X → DataFrame
 y → Series
 ⚠️ Common Mistakes
 Mistake 1
+```
 df["Name","Age"]
-
-❌ Wrong
+```
+## ❌ Wrong
 
 Correct:
-
+```
 df[["Name","Age"]]
+```
 Mistake 2
 
 Confusing .loc and .iloc
-
+```
 .loc → label
 .iloc → position
-🎯 Interview Questions
+```
+## 🎯 Interview Questions
 
 1️⃣ Difference between .loc[] and .iloc[]
 2️⃣ Why does selecting one column return a Series?
 3️⃣ How do you select multiple columns in Pandas?
 4️⃣ How do you extract features and target variable?
 
-🚀 Next Topic
+## 🚀 Next Topic
 
 Next documentation section:
-
+```
 Boolean Indexing
 Conditional Filtering
 Query Method
-
+```
 These are very important for real-world data filtering in ML projects.
 
 If you want, I can also give you a 🔥 professional GitHub README UI template used by top AI engineers, which includes:
 
-Navigation menu
+- Navigation menu
 
-Collapsible sections
+- Collapsible sections
 
-Clean badges
+- Clean badges
 
-Quick links
+- Quick links
 
 Table of contents
 
@@ -2483,7 +2505,7 @@ Query Method
 Below is a professional GitHub README.md documentation-style note you can paste directly into your repo.
 It follows the same structured style as previous sections so your Pandas notes look like a real documentation site.
 
-🐼 Pandas – Boolean Indexing & Conditional Filtering
+## 🐼 Pandas – Boolean Indexing & Conditional Filtering
 
 Boolean indexing is one of the most powerful features of Pandas.
 It allows you to filter rows based on conditions, which is extremely common in data cleaning and ML preprocessing.
@@ -2498,23 +2520,25 @@ Select rows that match criteria
 
 Create subsets of datasets
 
-📚 Topics Covered
+## 📚 Topics Covered
 
-Boolean Indexing
+- Boolean Indexing
 
-Conditional Filtering
+- Conditional Filtering
 
-Query Method
+- Query Method
 
-1️⃣ Boolean Indexing
+## 1️⃣ Boolean Indexing
 
 Boolean indexing means selecting rows using True / False conditions.
 
 When a condition is applied, Pandas creates a Boolean mask.
-
+```
 True  → Row selected
 False → Row ignored
+```
 Example Dataset
+```
 import pandas as pd
 
 data = {
@@ -2526,38 +2550,49 @@ data = {
 df = pd.DataFrame(data)
 
 print(df)
-Output
+```
+## Output
+```
    Name  Age  Score
 0  Aman   22     88
 1  Riya   21     92
 2  John   23     85
 3  Sara   20     70
-Example: Boolean Condition
+```
+## Example: Boolean Condition
+```
 df["Score"] > 85
-Output
+```
+## Output
+```
 0     True
 1     True
 2    False
 3    False
 Name: Score, dtype: bool
-
+```
 Explanation:
-
+```
 Index	Score	Condition (>85)
+
 0	88	True
 1	92	True
 2	85	False
 3	70	False
+```
 Filtering Using Boolean Index
+```
 df[df["Score"] > 85]
-Output
+``
+## Output
+```
    Name  Age  Score
 0  Aman   22     88
 1  Riya   21     92
-
+```
 Only rows where Score > 85 are returned.
 
-2️⃣ Conditional Filtering
+## 2️⃣ Conditional Filtering
 
 Multiple conditions can be applied using logical operators.
 
@@ -2566,72 +2601,92 @@ Operator	Meaning
 `	`
 ~	NOT
 
-⚠ Important: Conditions must be inside parentheses.
+## ⚠ Important: Conditions must be inside parentheses.
 
-Example 1 – AND Condition
+## Example 1 – AND Condition
 
 Filter students with:
-
+```
 Score > 80 AND Age > 21
 df[(df["Score"] > 80) & (df["Age"] > 21)]
-Output
+```
+## Output
+```
    Name  Age  Score
 0  Aman   22     88
 2  John   23     85
-Example 2 – OR Condition
+```
+## Example 2 – OR Condition
+```
 df[(df["Score"] > 90) | (df["Age"] < 21)]
-Output
+```
+## Output
+```
    Name  Age  Score
 1  Riya   21     92
 3  Sara   20     70
-Example 3 – NOT Condition
+```
+## Example 3 – NOT Condition
+```
 df[~(df["Score"] > 85)]
+```
 Output
+```
    Name  Age  Score
 2  John   23     85
 3  Sara   20     70
+```
 Visual Explanation
 
 Original Dataset
-
+```
 Index   Name   Age   Score
 0       Aman   22    88
 1       Riya   21    92
 2       John   23    85
 3       Sara   20    70
-
+```
 Condition:
-
+```
 Score > 85
-
+```
 Boolean Mask
-
+```
 [True, True, False, False]
-
-Filtered Result
-
+```
+## Filtered Result
+```
 Aman
 Riya
-3️⃣ Query Method
+```
+## 3️⃣ Query Method
 
 Pandas provides a clean SQL-like syntax for filtering using .query().
 
 This is often used in large datasets and production pipelines.
 
-Syntax
+## Syntax
+```
 df.query("condition")
-Example
+```
+## Example
 df.query("Score > 85")
 Output
+```
    Name  Age  Score
 0  Aman   22     88
 1  Riya   21     92
+```
 Multiple Conditions
+```
 df.query("Score > 80 and Age > 21")
+```
 Output
+```
    Name  Age  Score
 0  Aman   22     88
 2  John   23     85
+```
 Query vs Boolean Indexing
 Method	Example	Style
 Boolean Indexing	df[df["Score"] > 85]	Pythonic
@@ -2639,25 +2694,25 @@ Query	df.query("Score > 85")	SQL-like
 
 Both give the same result.
 
-🤖 Machine Learning Example
+## 🤖 Machine Learning Example
 
 Imagine dataset:
-
+```
 Age   Salary   Purchased
 22    25000       0
 35    60000       1
 29    45000       1
-
+```
 Filtering high salary customers:
-
+```
 df[df["Salary"] > 40000]
-
-Output
-
+```
+## Output
+```
 Age   Salary   Purchased
 35    60000       1
 29    45000       1
-
+```
 This helps in:
 
 Customer segmentation
@@ -2666,17 +2721,18 @@ Fraud detection
 
 Feature engineering
 
-⚠️ Common Mistakes
+## ⚠️ Common Mistakes
 Missing parentheses
 
-❌ Wrong
-
+## ❌ Wrong
+```
 df[df["Age"] > 20 & df["Score"] > 80]
-
-✔ Correct
-
+```
+## ✔ Correct
+```
 df[(df["Age"] > 20) & (df["Score"] > 80)]
-🎯 Interview Questions
+```
+## 🎯 Interview Questions
 
 1️⃣ What is Boolean indexing in Pandas?
 2️⃣ Difference between & and and in Pandas?
@@ -2736,7 +2792,7 @@ Working with hierarchical datasets
 
 Sorting and organizing data
 
-📚 Topics Covered
+## 📚 Topics Covered
 ```
 Setting Index
 
