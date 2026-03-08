@@ -1325,114 +1325,122 @@ max    25.000000  35000.000000     4.000000
 ```
 ## 🔥 Important ML Use
 
-Detect outliers
+- Detect outliers
 
-Check skewness
+- Check skewness
 
-Feature scaling decision
+- Feature scaling decision
 
-Compare min/max
+- Compare min/max
 
-🔹 Include categorical summary
+## 🔹 Include categorical summary
 df.describe(include='object')
-5️⃣ .shape
+# 5️⃣ .shape
 
 Gives dataset dimensions.
 
 df.shape
 
-Output:
-
+## Output:
+```
 (7, 5)
-
+```
 Meaning:
-
+```
 7 rows
 
 5 columns
-
-🔥 ML Use
+```
+## 🔥 ML Use
+```
 rows, cols = df.shape
-
+```
 Helps understand dataset size.
 
-6️⃣ .columns
+# 6️⃣ .columns
 
 Returns column names.
 
 df.columns
 
-Output:
-
+## Output:
+```
 Index(['Name', 'Age', 'Salary', 'Department', 'Experience'], dtype='object')
+```
 Convert to list
+```
 list(df.columns)
-7️⃣ .dtypes
+```
+# 7️⃣ .dtypes
 
 Shows data type of each column.
-
+```
 df.dtypes
-
-Output:
-
+```
+## Output:
+```
 Name          object
 Age            int64
 Salary         int64
 Department    object
 Experience     int64
 dtype: object
-🔥 Important for ML
+```
+## 🔥 Important for ML
 
 If you see:
-
+```
 object → need encoding
 
 datetime → need conversion
 
 category → memory optimized
-
-8️⃣ .value_counts()
+```
+## 8️⃣ .value_counts()
 
 Counts frequency of unique values.
 
-Example:
-
+## Example:
+```
 df["Department"].value_counts()
-
-Output:
-
+```
+## Output:
+```
 IT         3
 HR         2
 Finance    2
-🔥 ML Use
+```
+## 🔥 ML Use
 
-Class imbalance detection
+- Class imbalance detection
 
-Feature distribution check
+- Feature distribution check
 
-Example:
-
+## Example:
+```
 df["Age"].value_counts()
-9️⃣ .unique()
+```
+## 9️⃣ .unique()
 
 Returns unique values.
-
+```
 df["Department"].unique()
-
-Output:
-
+```
+## Output:
+```
 array(['IT', 'HR', 'Finance'], dtype=object)
-🔥 ML Use
+```
+## 🔥 ML Use
 
-Find categories
+- Find categories
 
-Prepare encoding
+- Prepare encoding
 
-Detect spelling mistakes
+- Detect spelling mistakes
 
-🔥 Visual Understanding Diagram
+## 🔥 Visual Understanding Diagram
 Dataset Inspection Flow
-
+```
 df.head()     → Preview
 df.info()     → Structure + Missing
 df.describe() → Statistics
@@ -1440,28 +1448,29 @@ df.shape      → Size
 df.dtypes     → Data types
 df.value_counts() → Distribution
 df.unique()   → Categories
-🔥 Real ML Interview Question
+```
+## 🔥 Real ML Interview Question
 
 If interviewer gives dataset:
 
 First thing you do?
 
 Answer:
-
+```
 df.head()
 df.info()
 df.describe()
-
+```
 Explain why.
 
-🔥 Common Beginner Mistakes
+## 🔥 Common Beginner Mistakes
 
-❌ Ignoring object dtype
-❌ Not checking missing values
-❌ Ignoring class imbalance
-❌ Not checking dataset size
+- ❌ Ignoring object dtype
+- ❌ Not checking missing values
+- ❌ Ignoring class imbalance
+- ❌ Not checking dataset size
 
-🚀 Summary Table
+## 🚀 Summary Table
 Method	Purpose
 head()	First rows
 tail()	Last rows
@@ -1472,26 +1481,21 @@ columns	Column names
 dtypes	Data types
 value_counts()	Frequency
 unique()	Unique values
-🔥 Next Level (Very Important)
+## 🔥 Next Level (Very Important)
 
 Now we move to:
 
-👉 Data Selection & Filtering
+## 👉 Data Selection & Filtering
 
-Selecting columns
+- Selecting columns
 
-Selecting rows
+- Selecting rows
 
-loc
+- loc
 
-iloc
+- iloc
 
-Boolean indexing
-
-Provide such way like eariler    mean last output like
-Got it Tapu 👍
-You want the same GitHub README style notes like the previous one.
-Here is clean Markdown you can directly paste into README.md.
+- Boolean indexing
 
 # 🔍 Pandas Data Inspection (First Step in ML)
 
