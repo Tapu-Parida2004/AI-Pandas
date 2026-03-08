@@ -2703,25 +2703,25 @@ sort_index()
 
 These are very important for real ML dataset manipulation.
 
-5️⃣ Indexing & Reindexing
+## 5️⃣ Indexing & Reindexing
 
-Setting index
+- Setting index
 
-Resetting index
-
-Multi-index
+- Resetting index
+ 
+- Multi-index
 
 Sorting:
 
-sort_values()
+- sort_values()
 
-sort_index()
+- sort_index()
 
 Below is a clean professional GitHub README.md documentation section for your Pandas notes.
 You can paste this directly into your repository (for example 03_Pandas/indexing_reindexing.md).
 It follows documentation style like official libraries with tables, code, outputs, diagrams, and explanations.
 
-🐼 Pandas – Indexing & Reindexing
+## 🐼 Pandas – Indexing & Reindexing
 
 Indexing is a core concept in Pandas.
 Every row in a DataFrame has an index (label) that helps identify and access data efficiently.
@@ -2737,7 +2737,7 @@ Working with hierarchical datasets
 Sorting and organizing data
 
 📚 Topics Covered
-
+```
 Setting Index
 
 Resetting Index
@@ -2749,14 +2749,15 @@ Sorting Data
 sort_values()
 
 sort_index()
-
-1️⃣ Setting Index
+```
+## 1️⃣ Setting Index
 
 The index represents the row labels of a DataFrame.
 
 By default, Pandas assigns an integer index.
 
 Default Index
+```
 import pandas as pd
 
 data = {
@@ -2768,12 +2769,14 @@ data = {
 df = pd.DataFrame(data)
 
 print(df)
-Output
+```
+## Output
+```
    Name  Age  Score
 0  Aman   22     88
 1  Riya   21     92
 2  John   23     85
-
+```
 Here:
 
 0,1,2 = Default Index
@@ -2783,55 +2786,70 @@ Sometimes we want a meaningful identifier as the index.
 
 Example: Student ID or Name.
 
-Syntax
+## Syntax
+```
 df.set_index("column_name")
-Example
+```
+## Example
+```
 df = df.set_index("Name")
 print(df)
-Output
+```
+### Output
+```
       Age  Score
 Name
 Aman   22     88
 Riya   21     92
 John   23     85
-
+```
 Now the Name column becomes the index.
 
 Permanent Change
+```
 df.set_index("Name", inplace=True)
-
+```
 inplace=True modifies the original DataFrame.
 
-2️⃣ Resetting Index
+## 2️⃣ Resetting Index
 
 Resetting index converts the index back to a column.
 
 Syntax
+```
 df.reset_index()
-Example
+```
+## Example
+```
 df = df.reset_index()
 
 print(df)
-Output
+```
+## Output
+```
    Name  Age  Score
 0  Aman   22     88
 1  Riya   21     92
 2  John   23     85
+```
 Reset Without Adding Old Index
+```
 df.reset_index(drop=True)
-
+```
 This removes the previous index completely.
 
-3️⃣ Multi-Index (Hierarchical Index)
+## 3️⃣ Multi-Index (Hierarchical Index)
 
 A Multi-Index allows multiple columns to act as the index.
 
 This is useful for hierarchical datasets.
 
 Example:
-
+```
 Country → City → Population
+```
 Example Dataset
+```
 data = {
     "Country": ["India", "India", "USA", "USA"],
     "City": ["Mumbai", "Delhi", "NY", "LA"],
@@ -2843,104 +2861,127 @@ Creating Multi-Index
 df = df.set_index(["Country", "City"])
 
 print(df)
-Output
+```
+## Output
+```
                Population
 Country City
 India   Mumbai        20
         Delhi         18
 USA     NY             8
         LA             4
+        ```
 Diagram
+```
 Country
    └── City
         └── Population
-
+```
 Multi-index allows hierarchical data analysis.
 
-4️⃣ Sorting Data
+## 4️⃣ Sorting Data
 
 Sorting helps organize datasets based on values or index.
 
 Pandas provides two main sorting methods:
-
+```
 Method	Purpose
 sort_values()	Sort by column values
 sort_index()	Sort by index
 sort_values()
-
+```
 Sorts rows based on column values.
 
 Syntax
+```
 df.sort_values(by="column_name")
-Example
+```
+## Example
+```
 df.sort_values(by="Score")
-Output
+```
+## Output
+```
    Name  Age  Score
 2  John   23     85
 0  Aman   22     88
 1  Riya   21     92
-
+```
 Sorted by Score ascending.
 
 Descending Order
+```
 df.sort_values(by="Score", ascending=False)
+```
 Output
+```
    Name  Age  Score
 1  Riya   21     92
 0  Aman   22     88
 2  John   23     85
+```
 Sorting by Multiple Columns
+```
 df.sort_values(by=["Age", "Score"])
-
+```
 This sorts first by Age, then by Score.
-
+```
 sort_index()
-
+```
 Sorts rows based on index labels.
 
-Syntax
+## Syntax
+```
 df.sort_index()
-Example
+```
+## Example
+```
 df.sort_index()
-Output
+```
+## Output
+```
    Name  Age  Score
 0  Aman   22     88
 1  Riya   21     92
 2  John   23     85
+```
 Descending Index
+```
 df.sort_index(ascending=False)
+```
 Visual Summary
 
 Original Data
-
+```
 Index  Name   Age   Score
 2      John   23    85
 0      Aman   22    88
 1      Riya   21    92
-
+```
 After sort_index()
-
+```
 0  Aman
 1  Riya
 2  John
-
+```
 After sort_values("Score")
-
+```
 John
 Aman
 Riya
-🤖 Machine Learning Example
+```
+## 🤖 Machine Learning Example
 
 Dataset:
-
+```
 CustomerID  Age  Purchase
 C101        25     1
 C102        30     0
-
+```
 Setting index:
-
+```
 df.set_index("CustomerID")
-
+```
 Benefits:
 
 Unique identifier
@@ -2951,15 +2992,19 @@ Faster joins and merges
 
 ⚠️ Common Mistakes
 Forgetting inplace
+```
 df.set_index("Name")
-
+```
 This does not modify original DataFrame unless:
-
+```
 inplace=True
+```
 Confusing sort_index() and sort_values()
 Function	Sorts by
+```
 sort_index()	Row labels
 sort_values()	Column values
+```
 ## 🎯 Interview Questions
 
 1️⃣ What is the difference between index and columns in Pandas?
