@@ -2960,21 +2960,21 @@ Confusing sort_index() and sort_values()
 Function	Sorts by
 sort_index()	Row labels
 sort_values()	Column values
-🎯 Interview Questions
+## 🎯 Interview Questions
 
 1️⃣ What is the difference between index and columns in Pandas?
 2️⃣ When should you use Multi-Index?
 3️⃣ Difference between sort_index() and sort_values()?
 4️⃣ Why is indexing important in data analysis?
 
-🚀 Next Topic
+## 🚀 Next Topic
 
 Next documentation section:
 
 Handling Missing Values
 
 Including:
-
+```
 isnull()
 
 notnull()
@@ -2988,27 +2988,27 @@ Forward Fill
 Backward Fill
 
 Replacing Missing Values
-
+```
 This is one of the most important topics for Machine Learning preprocessing.
 
-6️⃣ Handling Missing Values
+## 6️⃣ Handling Missing Values
 
-isnull()
+- isnull()
 
-notnull()
+- notnull()
 
-dropna()
+- dropna()
 
-fillna()
+- fillna()
 
-Forward fill / backward fill
+- Forward fill / backward fill
 
-Replacing values.  all detailed elaborately
+- Replacing values.  all detailed elaborately
 
 Below is a professional GitHub README.md documentation-style note you can directly paste into your repo.
 It is fully structured, ML-focused, with code, outputs, tables, diagrams, and explanations so it looks like real technical documentation.
 
-🐼 Pandas – Handling Missing Values
+## 🐼 Pandas – Handling Missing Values
 
 Handling missing data is one of the most important steps in Machine Learning preprocessing.
 
@@ -3025,18 +3025,18 @@ Data collection may have errors
 Because of this, missing values appear frequently.
 
 Example dataset:
-
+```
 Name   Age   Salary
 Aman   22    25000
 Riya   NaN   30000
 John   25    NaN
-
+```
 Machine learning models cannot work with missing values, so we must detect and handle them properly.
 
-📚 Topics Covered
+## 📚 Topics Covered
 
 What are Missing Values
-
+```
 isnull()
 
 notnull()
@@ -3048,17 +3048,17 @@ fillna()
 Forward Fill / Backward Fill
 
 Replacing Values
-
-1️⃣ What Are Missing Values?
+```
+## 1️⃣ What Are Missing Values?
 
 Missing values in Pandas are represented as:
-
+```
 NaN → Not a Number
 None
 NaT → Missing datetime
-
+```
 Example dataset:
-
+```
 import pandas as pd
 import numpy as np
 
@@ -3071,33 +3071,41 @@ data = {
 df = pd.DataFrame(data)
 
 print(df)
-Output
+```
+## Output
+```
    Name   Age   Salary
 0  Aman  22.0  25000.0
 1  Riya   NaN  30000.0
 2  John  24.0      NaN
 3  Sara  21.0  28000.0
-
+```
 Here:
-
+```
 NaN = Missing value
-2️⃣ isnull()
+```
+## 2️⃣ isnull()
 
 isnull() is used to detect missing values.
 
-Syntax
+## Syntax
+``
 df.isnull()
-Example
+```
+## Example
+```
 df.isnull()
-Output
+```
+## Output
+```
     Name    Age  Salary
 0  False  False   False
 1  False   True   False
 2  False  False    True
 3  False  False   False
-
-Explanation:
-
+``
+## Explanation:
+```
 Value	Meaning
 True	Missing value
 False	Value exists
@@ -3108,108 +3116,130 @@ Name      0
 Age       1
 Salary    1
 dtype: int64
-
+```
 This tells how many missing values exist in each column.
 
-3️⃣ notnull()
+## 3️⃣ notnull()
 
 notnull() is the opposite of isnull().
 
 It returns:
-
+```
 True → Value exists
 False → Missing value
-Example
+```
+## Example
+```
 df.notnull()
-Output
+```
+## Output
+```
     Name   Age  Salary
 0   True  True   True
 1   True False   True
 2   True  True  False
 3   True  True   True
-4️⃣ dropna()
+```
+## 4️⃣ dropna()
 
 dropna() removes rows or columns containing missing values.
 
 Drop Rows with Missing Values
-Syntax
+## Syntax
+```
 df.dropna()
-Example
+```
+## Example
+```
 df.dropna()
-Output
+```
+## Output
+```
    Name   Age   Salary
 0  Aman  22.0  25000.0
 3  Sara  21.0  28000.0
-
+```
 Rows containing NaN are removed.
 
 Drop Columns with Missing Values
+```
 df.dropna(axis=1)
-Output
+```
+## Output
+```
    Name
 0  Aman
 1  Riya
 2  John
 3  Sara
-
-Explanation:
-
+```
+## Explanation:
+```
 axis = 0 → rows
 axis = 1 → columns
 Drop Rows if All Values Missing
 df.dropna(how="all")
 Drop Rows if Any Value Missing
 df.dropna(how="any")
-5️⃣ fillna()
+```
+## 5️⃣ fillna()
 
 Instead of removing data, we can replace missing values.
 
-Syntax
+## Syntax
+```
 df.fillna(value)
+```
 Example – Fill with Constant Value
+```
 df.fillna(0)
+```
 Output
+```
    Name   Age   Salary
 0  Aman  22.0  25000.0
 1  Riya   0.0  30000.0
 2  John  24.0      0.0
 3  Sara  21.0  28000.0
+```
 Fill with Mean Value
 
 Common in ML preprocessing.
-
+```
 df["Age"].fillna(df["Age"].mean(), inplace=True)
-
+```
 Example:
-
+```
 Mean Age = 22.33
-
+```
 Missing age will be replaced with 22.33.
 
 Fill with Median
 
 Better for outliers.
-
+```
 df["Salary"].fillna(df["Salary"].median())
+```
 Fill with Mode
 
 Used for categorical variables.
-
+```
 df["City"].fillna(df["City"].mode()[0])
-6️⃣ Forward Fill / Backward Fill
+```
+## 6️⃣ Forward Fill / Backward Fill
 
-These methods copy nearby values.
+- These methods copy nearby values.
 
-Used in time-series data.
+- Used in time-series data.
 
-Forward Fill (ffill)
+- Forward Fill (ffill)
 
-Fills missing values with the previous value.
-
+- Fills missing values with the previous value.
+```
 df.fillna(method="ffill")
-
-Example:
-
+```
+## Example:
+```
 Original
 10
 NaN
@@ -3222,75 +3252,84 @@ Forward Fill
 10
 15
 Backward Fill (bfill)
-
+```
 Fills missing values with the next value.
-
+```
 df.fillna(method="bfill")
-
-Example:
+```
+## Example:
 
 Original
+```
 10
 NaN
 NaN
 15
-
+```
 Backward Fill
+```
 10
 15
 15
 15
+```
 Visual Explanation
 Original Data
-
+```
 Index  Value
 0      10
 1      NaN
 2      NaN
 3      20
-
+```
 Forward Fill
-
+```
 10
 10
 10
 20
-
+```
 Backward Fill
-
+```
 10
 20
 20
 20
-7️⃣ Replacing Values
+```
+## 7️⃣ Replacing Values
 
 Sometimes missing values are represented as:
-
+```
 "?"
 "N/A"
 "unknown"
 "-"
-
+```
 These must be converted to NaN first.
 
 Replace Example
+```
 df.replace("?", np.nan)
 Replace Multiple Values
 df.replace(["?", "N/A"], np.nan)
+```
 Replace Specific Column
+```
 df["Age"].replace("unknown", np.nan)
-🤖 Machine Learning Best Practices
+```
+## 🤖 Machine Learning Best Practices
 
 Handling missing values properly is critical in ML.
 
-Common strategies:
+## Common strategies:
 
-Data Type	Strategy
-Numerical	Mean / Median
-Categorical	Mode
-Time Series	Forward Fill
-Large Missing %	Drop column
-Example ML Workflow
+- Data Type	Strategy
+- Numerical	Mean / Median
+- Categorical	Mode
+- Time Series	Forward Fill
+- Large Missing %	Drop column
+## Example ML Workflow
+```
 Raw Dataset
       ↓
 Detect Missing Values
@@ -3304,44 +3343,45 @@ fillna(mean / median)
 Clean Dataset
       ↓
 Train ML Model
-⚠️ Common Mistakes
+```
+## ⚠️ Common Mistakes
 Dropping Too Much Data
 df.dropna()
-
+```
 May remove too many rows.
 
 Filling with Wrong Value
-
+```
 Example:
-
+```
 Filling salary with 0
 
 This may distort model predictions.
-
-🎯 Interview Questions
-
+```
+## 🎯 Interview Questions
+```
 1️⃣ What is NaN in Pandas?
 2️⃣ Difference between isnull() and notnull()?
 3️⃣ When should you use dropna() vs fillna()?
 4️⃣ Why is median better than mean for outliers?
 5️⃣ What is forward fill?
-
-🚀 Next Topic
+```
+## 🚀 Next Topic
 
 Next documentation section:
 
 Handling Duplicates
 
 Topics include:
-
+```
 duplicated()
 
 drop_duplicates()
-
+```
 These are also very important for cleaning real-world datasets.
 
 If you want, I can also help you build a complete GitHub Pandas Notes Repository structure like this:
-
+```
 Pandas-For-AI-ML/
 │
 ├── 01_Introduction
@@ -3353,55 +3393,57 @@ Pandas-For-AI-ML/
 ├── 07_Duplicates
 ├── 08_Data_Types
 ├── 09_String_Operations
-
+```
 It will look like a professional AI engineer learning repository.
 
-7️⃣ Handling Duplicates
-
+## 7️⃣ Handling Duplicates
+  ```
 duplicated()
 
 drop_duplicates()
-
+```
 Below is a professional GitHub README documentation style note you can directly paste into your README.md.
 It follows the same structured learning format you have been using so you can easily open it in office and revise quickly.
 
-🐼 Pandas for Machine Learning — Phase 2
-7️⃣ Handling Duplicates in Pandas
+## 🐼 Pandas for Machine Learning — Phase 2
+## 7️⃣ Handling Duplicates in Pandas
 
 Duplicate data is very common in real-world datasets.
 Duplicates can occur because of:
 
-Data entry errors
+- Data entry errors
 
-Data merging mistakes
+- Data merging mistakes
 
-Repeated records
+- Repeated records
 
-System logging duplicates
+- System logging duplicates
 
 Handling duplicates is important because they can:
 
-Bias machine learning models
+- Bias machine learning models
 
-Inflate statistics
+- Inflate statistics
 
-Distort analysis
+- Distort analysis
 
 Pandas provides two main functions:
-
+```
 duplicated()
 drop_duplicates()
-1️⃣ Detecting Duplicates — duplicated()
+```
+## 1️⃣ Detecting Duplicates — duplicated()
 
 The duplicated() function checks whether a row is a duplicate of a previous row.
 
 It returns a Boolean Series:
-
+```
 True → duplicate row
 
 False → unique row
-
+```
 Example Dataset
+```
 import pandas as pd
 
 data = {
@@ -3413,160 +3455,165 @@ data = {
 df = pd.DataFrame(data)
 
 print(df)
-
+```
 Output:
-
+```
     Name  Age     City
 0  Alice   25       NY
 1    Bob   30       LA
 2  Alice   25       NY
 3  David   40  Chicago
 4    Bob   30       LA
-
+```
 Here rows 2 and 4 are duplicates.
 
 Check Duplicate Rows
+```
 df.duplicated()
-
-Output:
-
+```
+## Output:
+```
 0    False
 1    False
 2     True
 3    False
 4     True
 dtype: bool
-
-Explanation:
-
+```
+## Explanation:
+```
 Row 2 duplicates row 0
 
 Row 4 duplicates row 1
-
+```
 Show Only Duplicate Rows
+````
 df[df.duplicated()]
-
+``
 Output
-
+```
     Name  Age City
 2  Alice   25   NY
 4    Bob   30   LA
 Mark All Duplicates
-
+```
 By default, the first occurrence is not marked as duplicate.
 
 If you want to mark all duplicates, use:
-
+````
 df.duplicated(keep=False)
-
+```
 Output:
-
+```
 0     True
 1     True
 2     True
 3    False
 4     True
-
+```
 Now both original and duplicate rows are marked.
 
-2️⃣ Detect Duplicates Based on Specific Columns
+## 2️⃣ Detect Duplicates Based on Specific Columns
 
 Sometimes duplicates should be checked only for certain columns.
 
 Example:
-
+```
 df.duplicated(subset=["Name"])
-
+```
 Output
-
+```
 0    False
 1    False
 2     True
 3    False
 4     True
-
+```
 This checks duplicates only in the Name column.
 
-3️⃣ Removing Duplicate Rows — drop_duplicates()
+## 3️⃣ Removing Duplicate Rows — drop_duplicates()
 
 To remove duplicates permanently:
-
+```
 df.drop_duplicates()
-
+```
 Output
-
+```
     Name  Age     City
 0  Alice   25       NY
 1    Bob   30       LA
 3  David   40  Chicago
-
+```
 Duplicates are removed automatically.
 
 Remove Duplicates In-place
+```
 df.drop_duplicates(inplace=True)
-
+```
 Now the original dataframe is updated.
 
-4️⃣ Keep First or Last Duplicate
+## 4️⃣ Keep First or Last Duplicate
 Keep First (default)
+```
 df.drop_duplicates(keep="first")
-
+```
 Keeps the first occurrence.
 
 Keep Last
+```
 df.drop_duplicates(keep="last")
-
+```
 Output:
-
+```
     Name  Age     City
 2  Alice   25       NY
 3  David   40  Chicago
 4    Bob   30       LA
 Remove All Duplicates
 df.drop_duplicates(keep=False)
-
+```
 Output:
-
+```
     Name  Age     City
 3  David   40  Chicago
-
+```
 Only completely unique rows remain.
 
-5️⃣ Remove Duplicates Based on Specific Columns
+## 5️⃣ Remove Duplicates Based on Specific Columns
 
 Example:
-
+```
 df.drop_duplicates(subset=["Name"])
-
+```
 Output
-
+```
     Name  Age     City
 0  Alice   25       NY
 1    Bob   30       LA
 3  David   40  Chicago
-
+```
 Duplicates are removed based on Name column only.
 
-6️⃣ Real-World Example (Machine Learning Dataset)
+## 6️⃣ Real-World Example (Machine Learning Dataset)
 
 Imagine a customer dataset:
-
+```
 df = pd.read_csv("customers.csv")
-
+```
 Check duplicates:
-
+```
 df[df.duplicated()]
-
+```
 Remove duplicates based on CustomerID:
-
+```
 df = df.drop_duplicates(subset=["CustomerID"])
-
+```
 This ensures each customer appears only once.
 
-7️⃣ Visual Understanding
+## 7️⃣ Visual Understanding
 
 Example dataset
-
+```
 Row   Name   Age   City
 -----------------------
 0     Alice  25    NY
@@ -3574,32 +3621,37 @@ Row   Name   Age   City
 2     Alice  25    NY   ← Duplicate
 3     David  40    Chicago
 4     Bob    30    LA   ← Duplicate
-
+```
 After removing duplicates:
-
+```
 Row   Name   Age   City
 -----------------------
 0     Alice  25    NY
 1     Bob    30    LA
 3     David  40    Chicago
-8️⃣ Best Practices for ML
+```
+## 8️⃣ Best Practices for ML
 
 Always check duplicates before training a model.
 
 Typical workflow:
 
 # Step 1
+```
 df.info()
-
+```
 # Step 2
+```
 df.duplicated().sum()
-
+```
 # Step 3
+```
 df = df.drop_duplicates()
-
+```
 This ensures clean training data.
 
-📌 Quick Summary
+## 📌 Quick Summary
+```
 Function	Purpose
 duplicated()	Detect duplicate rows
 df[df.duplicated()]	Show duplicates
@@ -3608,19 +3660,19 @@ subset=	Check duplicates in specific columns
 keep="first"	Keep first occurrence
 keep="last"	Keep last occurrence
 keep=False	Remove all duplicates
-
+```
 If you want, I can also give you the next README sections in the same professional style:
 
-8️⃣ Data Transformation
+## 8️⃣ Data Transformation
 
-9️⃣ GroupBy Operations
+## 9️⃣ GroupBy Operations
 
-🔟 Merging & Joining DataFrames
+## 🔟 Merging & Joining DataFrames
 
 These will make your GitHub notes look like a full Pandas documentation site.
 
-8️⃣ Data Type Conversion
-
+## 8️⃣ Data Type Conversion
+```
 astype()
 
 to_datetime()
@@ -3628,37 +3680,35 @@ to_datetime()
 to_numeric()
 
 Category data type
+```
 
-Below is a professional, GitHub-ready README.md section for Pandas – Data Type Conversion written in the same style as your previous notes so your repo looks like real documentation for ML engineers.
 
-You can copy-paste directly into GitHub README.
+## 🐼 Pandas Data Type Conversion
 
-🐼 Pandas Data Type Conversion
+- Data type conversion is very important in Machine Learning preprocessing because ML models require numeric inputs.
 
-Data type conversion is very important in Machine Learning preprocessing because ML models require numeric inputs.
+- Real-world datasets often contain:
 
-Real-world datasets often contain:
+- Strings instead of numbers
 
-Strings instead of numbers
+- Dates stored as text
 
-Dates stored as text
+- Categories stored as objects
 
-Categories stored as objects
+- Using Pandas, we convert them into ML-friendly formats.
 
-Using Pandas, we convert them into ML-friendly formats.
-
-8️⃣ Data Type Conversion
-🔹 Why Data Type Conversion is Important
+## 8️⃣ Data Type Conversion
+## 🔹 Why Data Type Conversion is Important
 
 Machine Learning models cannot understand raw text or mixed data types.
 
-Example dataset:
-
+## Example dataset:
+```
 Name	Age	Salary	Joining_Date
 Aman	25	50000	2023-01-10
 Riya	27	60000	2022-05-21
-
-For ML models:
+```
+## For ML models:
 
 Age → numeric
 
@@ -3668,13 +3718,14 @@ Joining_Date → datetime
 
 Categorical columns → encoded
 
-1️⃣ astype() – Change Data Type
+## 1️⃣ astype() – Change Data Type
 
 Used to convert one data type into another.
 
-Syntax
+## Syntax
 df["column"] = df["column"].astype(new_type)
-Example
+## Example
+```
 import pandas as pd
 
 data = {
@@ -3684,20 +3735,20 @@ data = {
 df = pd.DataFrame(data)
 
 print(df.dtypes)
-
-Output
-
+```
+## Output
+```
 Age    object
 dtype: object
-
-Convert to integer
-
+```
+## Convert to integer
+```
 df["Age"] = df["Age"].astype(int)
 
 print(df.dtypes)
-
-Output
-
+```
+## Output
+```
 Age    int64
 dtype: object
 Convert Multiple Columns
@@ -3705,28 +3756,34 @@ df = df.astype({
     "Age": "int64",
     "Salary": "float64"
 })
+```
 Convert to String
+```
 df["Age"] = df["Age"].astype(str)
+```
 Common Data Types
+```
 Type	Description
 int	Integer
 float	Decimal numbers
 str	String
 bool	True / False
+```
 category	Memory efficient categorical data
-2️⃣ to_datetime() – Convert to Date
+## 2️⃣ to_datetime() – Convert to Date
 
-Datasets often contain dates stored as text.
+> Datasets often contain dates stored as text.
 
-Example:
-
+## Example:
+```
 Date
 2024-01-01
 2024-02-10
-
+```
 Pandas converts them into datetime format.
 
-Example
+## Example
+```
 data = {
     "Date": ["2024-01-01", "2024-02-10"]
 }
@@ -3736,28 +3793,30 @@ df = pd.DataFrame(data)
 df["Date"] = pd.to_datetime(df["Date"])
 
 print(df.dtypes)
-
+```
 Output
-
+```
 Date    datetime64[ns]
 dtype: object
+````
 Extract Date Components
 
 After conversion you can extract useful features.
-
+```
 df["year"] = df["Date"].dt.year
 df["month"] = df["Date"].dt.month
 df["day"] = df["Date"].dt.day
-
-Example output
-
+```
+## Example output
+```
 Date	year	month	day
 2024-01-01	2024	1	1
 2024-02-10	2024	2	10
-Why Important in ML?
+```
+## Why Important in ML?
 
 Dates help create features like:
-
+```
 Month
 
 Day
@@ -3765,23 +3824,24 @@ Day
 Weekday
 
 Season
-
+```
 These improve model performance.
 
-3️⃣ to_numeric() – Convert to Numbers
+## 3️⃣ to_numeric() – Convert to Numbers
 
 Sometimes numeric columns contain text values.
 
-Example dataset:
-
+## Example dataset:
+```
 Salary
 50000
 60000
 Unknown
-
+```
 Trying to convert directly causes errors.
 
-Example
+## Example
+```
 data = {
     "Salary": ["50000", "60000", "Unknown"]
 }
@@ -3791,61 +3851,65 @@ df = pd.DataFrame(data)
 df["Salary"] = pd.to_numeric(df["Salary"], errors="coerce")
 
 print(df)
-
-Output
-
+```
+## Output
+```
    Salary
 0  50000
 1  60000
 2   NaN
+```
 Explanation
 Parameter	Meaning
 errors="coerce"	Invalid values become NaN
 
 This allows us to clean bad data automatically.
 
-4️⃣ Category Data Type
+## 4️⃣ Category Data Type
 
 Categorical data appears frequently in ML datasets.
 
-Example:
-
+## Example:
+```
 City
 Delhi
 Mumbai
 Delhi
-
+```
 Default dtype:
-
+```
 object
-
+```
 Convert to category:
-
+```
 df["City"] = df["City"].astype("category")
+```
 Check Categories
+```
 print(df["City"].cat.categories)
-
+```
 Example output
-
+```
 Index(['Delhi', 'Mumbai'], dtype='object')
+```
 Why Category Type is Important
 
-Benefits:
-
+## Benefits:
+```
 ✔ Saves memory
 ✔ Faster computations
 ✔ Useful for encoding features
-
-Example memory comparison:
-
+```
+## Example memory comparison:
+```
 Type	Memory
 object	High
 category	Low
-
+```
 For large datasets this dramatically improves performance.
 
-🧠 Internal ML Workflow
-
+## 🧠 Internal ML Workflow
+```
 Real ML preprocessing pipeline:
 
 Raw Dataset
@@ -3859,7 +3923,8 @@ Missing Value Handling
 Feature Engineering
       ↓
 Model Training
-🎯 Interview Questions
+```
+## 🎯 Interview Questions
 
 Common Pandas interview questions:
 
@@ -3873,30 +3938,32 @@ Common Pandas interview questions:
 
 5️⃣ Why must ML models use numeric features?
 
-🚀 Summary
+## 🚀 Summary
 Concept	Purpose
+```
 astype()	Change data type
 to_datetime()	Convert text → date
 to_numeric()	Convert text → number
 category	Memory-efficient categorical data
-🔜 Next Topic
+```
+## 🔜 Next Topic
 
 Next in the Pandas learning roadmap:
 
-9️⃣ String Operations
+## 9️⃣ String Operations
 
 We will learn:
-
+```
 .str.lower()
 .str.upper()
 .str.contains()
 .str.replace()
 .str.split()
-
+```
 These are extremely important for text preprocessing in ML datasets.
 
 If you want, I can also give you a 🔥 complete GitHub repo structure for your Pandas ML notes like this:
-
+```
 pandas-ml-notes/
 │
 ├── README.md
@@ -3911,20 +3978,20 @@ pandas-ml-notes/
 ├── 09_merge_join.md
 ├── 10_feature_engineering.md
 └── projects/
-
+```
 This will make your repo look like real AI engineer documentation (very impressive in interviews). 🚀
 
-9️⃣ String Operations
+## 9️⃣ String Operations
 
-.str.lower()
+- .str.lower()
 
-.str.upper()
+- .str.upper()
 
-.str.contains()
+- .str.contains()
 
-.str.replace()
+- .str.replace()
 
-.str.split()
+- .str.split()
 
 Below is a clean, professional GitHub README.md documentation style section for Pandas String Operations.
 It follows the same structure as your previous notes so your repo looks like real ML engineer documentation.
@@ -3933,43 +4000,45 @@ You can copy-paste directly into README.md.
 
 🐼 Pandas String Operations
 
-In real-world datasets, text data is very common.
+> In real-world datasets, text data is very common.
 
 Examples:
-
+```
 Name	City
 AMAN	Delhi
 riya	Mumbai
 John	Delhi
-
+```
 Before using data in Machine Learning, text columns must be cleaned and standardized.
 
 Pandas provides the .str accessor to perform vectorized string operations on a column.
 
-9️⃣ String Operations
-🔹 What is .str ?
+## 9️⃣ String Operations
+## 🔹 What is .str ?
 
-.str allows you to apply string functions on Pandas Series.
+> .str allows you to apply string functions on Pandas Series.
 
-Example column:
-
+## Example column:
+```
 df["Name"]
-
-Output
-
+```
+## Output
+```
 0    AMAN
 1    riya
 2    John
 Name: Name, dtype: object
-
+```
 Now we can apply string operations:
-
+```
 df["Name"].str.method()
-1️⃣ .str.lower() – Convert Text to Lowercase
+```
+## 1️⃣ .str.lower() – Convert Text to Lowercase
 
 Converts all characters in a column to lowercase.
 
 Example
+```
 import pandas as pd
 
 data = {
@@ -3981,45 +4050,51 @@ df = pd.DataFrame(data)
 df["Name"] = df["Name"].str.lower()
 
 print(df)
-
-Output
-
+```
+## Output
+```
     Name
 0   aman
 1   riya
 2   john
-Why Important?
+```
+## Why Important?
 
 Standardizing text avoids duplicate categories.
 
-Example problem:
-
+## Example problem:
+```
 Delhi
 DELHI
 delhi
-
+```
 All represent the same value.
 
-2️⃣ .str.upper() – Convert Text to Uppercase
+## 2️⃣ .str.upper() – Convert Text to Uppercase
 
 Converts text to uppercase.
 
 Example
+```
 df["Name"] = df["Name"].str.upper()
-
+```
 Output
-
+```
     Name
 0   AMAN
 1   RIYA
 2   JOHN
-3️⃣ .str.contains() – Find Matching Text
+```
+## 3️⃣ .str.contains() – Find Matching Text
 
 Used for filtering rows containing a specific pattern.
 
-Syntax
+## Syntax
+```
 df["column"].str.contains("pattern")
-Example Dataset
+```
+## Example Dataset
+```
 data = {
     "City": ["Delhi", "Mumbai", "New York", "Delhi"]
 }
@@ -4027,74 +4102,79 @@ data = {
 df = pd.DataFrame(data)
 Find rows containing Delhi
 df[df["City"].str.contains("Delhi")]
-
+```
 Output
-
+```
     City
 0   Delhi
 3   Delhi
+```
 Case Insensitive Search
+```
 df[df["City"].str.contains("delhi", case=False)]
-
+```
 Useful when dataset contains mixed capitalization.
 
-4️⃣ .str.replace() – Replace Text
+## 4️⃣ .str.replace() – Replace Text
 
 Used to replace characters or words in a column.
 
-Example
+## Example
 
-Dataset:
+## Dataset:
 
 Name
 Aman Kumar
 Riya Sharma
 
-Remove last names:
-
+## Remove last names:
+```
 df["Name"] = df["Name"].str.replace(" Kumar", "")
-
-Output
-
+```
+## Output
+```
    Name
 0  Aman
 1  Riya Sharma
 Replace Multiple Patterns
 df["City"] = df["City"].str.replace("New York", "NY")
-
+```
 Output
-
+```
 NY
 Delhi
 Mumbai
-5️⃣ .str.split() – Split Text
+```
+## 5️⃣ .str.split() – Split Text
 
 Used when a column contains multiple values in one string.
 
-Example dataset:
-
+## Example dataset:
+```
 Full_Name
 Aman Kumar
 Riya Sharma
-
+```
 Split first and last names.
 
-Example
+## Example
+```
 df[["First_Name","Last_Name"]] = df["Full_Name"].str.split(" ", expand=True)
-
+```
 Output
-
+```
 Full_Name	First_Name	Last_Name
 Aman Kumar	Aman	Kumar
 Riya Sharma	Riya	Sharma
 Without Expanding
 df["Full_Name"].str.split(" ")
-
+```
 Output
-
+```
 0    [Aman, Kumar]
 1    [Riya, Sharma]
-🔥 Real ML Use Cases
+```
+## 🔥 Real ML Use Cases
 
 String operations are used in data cleaning pipelines.
 
@@ -4106,7 +4186,7 @@ Example tasks:
 ✔ Preparing features for NLP models
 
 Example ML workflow:
-
+```
 Raw Dataset
       ↓
 Text Cleaning
@@ -4116,56 +4196,59 @@ String Processing
 Feature Engineering
       ↓
 Model Training
-🧠 Internal Working
+```
+## 🧠 Internal Working
 
 Pandas string operations are vectorized.
 
 Instead of loops:
 
-❌ Slow
-
+## ❌ Slow
+```
 for name in df["Name"]:
     print(name.lower())
-
-✔ Fast
-
+```
+## ✔ Fast
+```
 df["Name"].str.lower()
-
+```
 Vectorization makes Pandas very efficient for large datasets.
 
-🎯 Interview Questions
+## 🎯 Interview Questions
 
 Common Pandas interview questions:
 
-1️⃣ What is .str accessor in Pandas?
+- 1️⃣ What is .str accessor in Pandas?
 
-2️⃣ Difference between .str.split() and Python split()?
+- 2️⃣ Difference between .str.split() and Python split()?
 
-3️⃣ Why should text be standardized before ML?
+- 3️⃣ Why should text be standardized before ML?
 
-4️⃣ How to perform case-insensitive filtering?
+- 4️⃣ How to perform case-insensitive filtering?
 
-5️⃣ How to split a column into multiple columns?
+- 5️⃣ How to split a column into multiple columns?
 
-🚀 Summary
+## 🚀 Summary
 Function	Purpose
+```
 .str.lower()	Convert to lowercase
 .str.upper()	Convert to uppercase
 .str.contains()	Filter text patterns
 .str.replace()	Replace words
 .str.split()	Split text into columns
-🔜 Next Topic
+```
+## 🔜 Next Topic
 
 Next topic in your Pandas ML roadmap:
 
-🔟 Column Operations
+## 🔟 Column Operations
 
 We will learn:
 
-Creating new columns
-Renaming columns
-Dropping columns
-Applying functions to columns
+- Creating new columns
+- Renaming columns
+- Dropping columns
+- Applying functions to columns
 
 These operations are core to feature engineering in Machine Learning.
 
