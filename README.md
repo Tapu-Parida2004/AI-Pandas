@@ -1300,11 +1300,11 @@ Missing values	Check non-null
 Data types	int, object
 ## 🔥 Why Critical in ML?
 
-Models cannot handle object type directly
+- Models cannot handle object type directly
 
-Missing values must be handled
+- Missing values must be handled
 
-Memory usage awareness
+- Memory usage awareness
 
 # 4️⃣ .describe()
 
@@ -1471,6 +1471,7 @@ Explain why.
 - ❌ Not checking dataset size
 
 ## 🚀 Summary Table
+```
 Method	Purpose
 head()	First rows
 tail()	Last rows
@@ -1481,6 +1482,7 @@ columns	Column names
 dtypes	Data types
 value_counts()	Frequency
 unique()	Unique values
+```
 ## 🔥 Next Level (Very Important)
 
 Now we move to:
@@ -2497,11 +2499,11 @@ If you want, I can also give you a 🔥 professional GitHub README UI template u
 Table of contents
 
 Your repo will look like official documentation.
-
+```
 Boolean Indexing
 Conditional Filtering
 Query Method
-
+```
 Below is a professional GitHub README.md documentation-style note you can paste directly into your repo.
 It follows the same structured style as previous sections so your Pandas notes look like a real documentation site.
 
