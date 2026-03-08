@@ -1283,25 +1283,22 @@ df.info()
 > <class 'pandas.core.frame.DataFrame'>
 > RangeIndex: 7 entries, 0 to 6
 > Data columns (total 5 columns):
-
+```
 Column       Non-Null Count  Dtype
-
-
----
-
 0   Name         7 non-null      object
 1   Age          7 non-null      int64
 2   Salary       7 non-null      int64
 3   Department   7 non-null      object
 4   Experience   7 non-null      int64
+```
 
-🔥 What It Tells You
+## 🔥 What It Tells You
 Info	Meaning
 Total rows	7
 Columns	5
 Missing values	Check non-null
 Data types	int, object
-🔥 Why Critical in ML?
+## 🔥 Why Critical in ML?
 
 Models cannot handle object type directly
 
@@ -1309,12 +1306,13 @@ Missing values must be handled
 
 Memory usage awareness
 
-4️⃣ .describe()
+# 4️⃣ .describe()
 
 Shows statistical summary of numeric columns.
 
 df.describe()
-Output
+## Output
+```
 Age        Salary   Experience
 count   7.000000      7.000000     7.000000
 mean   22.571429  28714.285714     2.142857
@@ -1324,7 +1322,8 @@ min    21.000000  25000.000000     1.000000
 50%    22.000000  27000.000000     2.000000
 75%    23.500000  31000.000000     2.500000
 max    25.000000  35000.000000     4.000000
-🔥 Important ML Use
+```
+## 🔥 Important ML Use
 
 Detect outliers
 
