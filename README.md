@@ -1943,14 +1943,6 @@ AI-ML-NOTES
 ├── 04_Data_Visualization
 ├── 05_Machine_Learning
 
-This will make your GitHub look like a professional ML portfolio when companies check it.
-
-I can also show you how to create this in 3 minutes. 🚀
-
-YES
-
-Great Tapu! 🚀
-Let’s build a professional AI/ML Notes GitHub repository structure so you can open it in office and study quickly. This structure is used by many ML engineers.
 
 📁 AI / ML Learning Repository Structure
 
@@ -2258,13 +2250,16 @@ Row Selection
 
 .iloc[] – Position Based Selection
 
-1️⃣ Selecting Columns
+## 1️⃣ Selecting Columns
 
 Selecting a column returns a Series.
 
-Syntax
+## Syntax
+```
 df["column_name"]
-Example
+```
+## Example
+```
 import pandas as pd
 
 data = {
@@ -2276,12 +2271,15 @@ data = {
 df = pd.DataFrame(data)
 
 print(df["Name"])
-Output
+```
+## Output
+```
 0    Aman
 1    Riya
 2    John
 Name: Name, dtype: object
-Explanation
+```
+## Explanation
 Component	Meaning
 0,1,2	Index
 Aman,Riya,John	Values
@@ -2291,7 +2289,7 @@ Important
 Selecting one column returns:
 
 Series
-2️⃣ Selecting Multiple Columns
+## 2️⃣ Selecting Multiple Columns
 
 Selecting multiple columns returns a DataFrame.
 
