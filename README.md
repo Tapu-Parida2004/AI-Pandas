@@ -1276,13 +1276,13 @@ Name  Age  Salary Department  Experience
 
 ## 3️⃣ .info()
 
-This is VERY IMPORTANT for ML.
+> This is VERY IMPORTANT for ML.
 
 df.info()
-Output
-<class 'pandas.core.frame.DataFrame'>
-RangeIndex: 7 entries, 0 to 6
-Data columns (total 5 columns):
+## Output
+> <class 'pandas.core.frame.DataFrame'>
+> RangeIndex: 7 entries, 0 to 6
+> Data columns (total 5 columns):
 
 Column       Non-Null Count  Dtype
 
@@ -1294,6 +1294,7 @@ Column       Non-Null Count  Dtype
 2   Salary       7 non-null      int64
 3   Department   7 non-null      object
 4   Experience   7 non-null      int64
+
 🔥 What It Tells You
 Info	Meaning
 Total rows	7
