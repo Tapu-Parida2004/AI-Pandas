@@ -1949,7 +1949,7 @@ AI-ML-NOTES
 📁 AI / ML Learning Repository Structure
 
 Create a GitHub repository like this:
-
+```
 AI-ML-NOTES
 │
 ├── README.md
@@ -1987,7 +1987,7 @@ AI-ML-NOTES
 │   ├── house_price_prediction.md
 │   ├── sales_forecasting.md
 🧾 Main README.md (Homepage)
-
+```
 Put this in your main README.md so your repo looks professional.
 
 Writing
