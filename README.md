@@ -5911,3 +5911,452 @@ Topics include:
 - Expanding windows
 
 These concepts are **critical for time-series ML models such as sales forecasting, stock prediction, and demand forecasting**.
+# 🔹 PHASE 6: Time Series Analysis in Pandas (Important for AI/ML)
+
+Time series data is **data recorded over time**.
+
+Examples:
+
+| Date | Sales |
+|-----|------|
+| 2024-01-01 | 500 |
+| 2024-01-02 | 650 |
+| 2024-01-03 | 700 |
+
+Time series analysis is widely used in:
+
+- Stock market prediction
+- Sales forecasting
+- Demand prediction
+- Weather forecasting
+- Sensor data analysis
+- Log monitoring
+- Financial analytics
+
+Pandas provides powerful tools to **handle and analyze time-based datasets**.
+
+Key concepts include:
+
+- Datetime conversion
+- Extracting time components
+- Resampling
+- Rolling windows
+- Expanding windows
+
+---
+
+# 1️⃣4️⃣ Working with Dates in Pandas
+
+## Why Dates Matter in Machine Learning
+
+Most real-world datasets contain **time-related information**.
+
+Examples:
+
+| Feature | Meaning |
+|------|------|
+| Purchase Date | Customer buying behavior |
+| Transaction Time | Fraud detection |
+| Timestamp | Sensor readings |
+| Log time | System monitoring |
+
+Before using them in ML models, we must **convert and engineer time-based features**.
+
+---
+
+# 🔹 Datetime Conversion
+
+Datasets usually store dates as **strings**.
+
+Example:
+
+```
+"2024-03-01"
+```
+
+Machine learning models cannot understand strings directly.
+
+So we convert them into **datetime format**.
+
+### Syntax
+
+```python
+pd.to_datetime(column)
+```
+
+---
+
+## Example
+
+```python
+import pandas as pd
+
+data = {
+    "Date": ["2024-01-01", "2024-01-02", "2024-01-03"],
+    "Sales": [500, 650, 700]
+}
+
+df = pd.DataFrame(data)
+
+df["Date"] = pd.to_datetime(df["Date"])
+
+print(df)
+```
+
+Output
+
+```
+        Date  Sales
+0 2024-01-01   500
+1 2024-01-02   650
+2 2024-01-03   700
+```
+
+Now Pandas recognizes it as **datetime64 data type**.
+
+---
+
+# 🔹 Extracting Date Components
+
+Once a column is converted to datetime, we can extract useful components.
+
+This is **very important for feature engineering**.
+
+Common extracted features:
+
+| Feature | Example |
+|------|------|
+| Year | 2024 |
+| Month | 3 |
+| Day | 15 |
+| Weekday | Monday |
+
+---
+
+# Extract Year
+
+```python
+df["Year"] = df["Date"].dt.year
+```
+
+Output
+
+```
+Date        Sales   Year
+2024-01-01   500    2024
+2024-01-02   650    2024
+```
+
+---
+
+# Extract Month
+
+```python
+df["Month"] = df["Date"].dt.month
+```
+
+Output
+
+```
+Date        Month
+2024-01-01    1
+2024-01-02    1
+```
+
+---
+
+# Extract Day
+
+```python
+df["Day"] = df["Date"].dt.day
+```
+
+---
+
+# Extract Weekday
+
+```python
+df["Weekday"] = df["Date"].dt.day_name()
+```
+
+Output
+
+```
+Date        Weekday
+2024-01-01  Monday
+2024-01-02  Tuesday
+```
+
+This is useful for detecting **weekly sales patterns**.
+
+---
+
+# 🔹 Resampling
+
+Resampling means **changing the frequency of time-series data**.
+
+Example conversions:
+
+| Original Data | Resampled Data |
+|------|------|
+| Hourly data | Daily data |
+| Daily data | Monthly data |
+| Monthly data | Yearly data |
+
+---
+
+### Syntax
+
+```python
+df.resample("rule")
+```
+
+Common rules:
+
+| Rule | Meaning |
+|------|------|
+| D | Daily |
+| W | Weekly |
+| M | Monthly |
+| Y | Yearly |
+| H | Hourly |
+
+---
+
+## Example Dataset
+
+```python
+df = pd.DataFrame({
+    "Date": pd.date_range("2024-01-01", periods=10),
+    "Sales": [100,120,130,140,150,160,170,180,190,200]
+})
+
+df.set_index("Date", inplace=True)
+```
+
+---
+
+# Monthly Resampling
+
+```python
+df.resample("M").sum()
+```
+
+This groups all values **by month**.
+
+---
+
+# Weekly Resampling
+
+```python
+df.resample("W").mean()
+```
+
+This calculates **weekly average sales**.
+
+---
+
+# 🔹 Rolling Window
+
+Rolling windows calculate statistics **over a moving window of data**.
+
+Example:
+
+Compute average sales for the **last 3 days**.
+
+---
+
+### Syntax
+
+```python
+df["Sales"].rolling(window_size)
+```
+
+---
+
+## Example
+
+```python
+df["Rolling_Avg"] = df["Sales"].rolling(3).mean()
+```
+
+Output
+
+```
+Sales   Rolling_Avg
+100      NaN
+120      NaN
+130      116.6
+140      130
+150      140
+```
+
+Explanation:
+
+Rolling average of **last 3 values**.
+
+---
+
+# Rolling Sum
+
+```python
+df["Rolling_Sum"] = df["Sales"].rolling(3).sum()
+```
+
+---
+
+# Rolling Standard Deviation
+
+```python
+df["Rolling_STD"] = df["Sales"].rolling(3).std()
+```
+
+---
+
+# 🔹 Expanding Window
+
+Expanding windows compute statistics **from the beginning of the dataset**.
+
+Unlike rolling windows, the window **continually grows**.
+
+---
+
+### Syntax
+
+```python
+df["Sales"].expanding()
+```
+
+---
+
+## Example
+
+```python
+df["Expanding_Mean"] = df["Sales"].expanding().mean()
+```
+
+Output
+
+```
+Sales  Expanding_Mean
+100        100
+120        110
+130        116
+140        122
+150        128
+```
+
+Explanation:
+
+Mean calculated from **start of dataset to current row**.
+
+---
+
+# 🔹 Rolling vs Expanding
+
+| Feature | Rolling | Expanding |
+|------|------|------|
+| Window Size | Fixed | Growing |
+| Data Used | Recent values | Entire history |
+| Use Case | Short-term trends | Long-term averages |
+
+---
+
+# 🔥 Real Machine Learning Use Cases
+
+Time series features are extremely valuable.
+
+Examples:
+
+| Feature | Purpose |
+|------|------|
+| Day of week | Detect weekend sales |
+| Month | Seasonal trends |
+| Rolling mean | Short-term trends |
+| Expanding mean | Long-term trends |
+
+---
+
+# Example ML Feature Engineering
+
+```
+Date
+ ↓
+Extract Features
+ ↓
+Year
+Month
+Day
+Weekday
+ ↓
+Rolling Statistics
+ ↓
+Expanding Statistics
+ ↓
+Machine Learning Model
+```
+
+---
+
+# ⚡ Performance Tips
+
+✔ Always convert dates using `pd.to_datetime()`  
+
+✔ Set datetime column as index for resampling  
+
+```
+df.set_index("Date", inplace=True)
+```
+
+✔ Use vectorized `.dt` operations  
+
+✔ Avoid manual loops for date processing  
+
+---
+
+# 🎯 Interview Questions
+
+1️⃣ What is time series data?
+
+2️⃣ Difference between **rolling window and expanding window**?
+
+3️⃣ What is **resampling** in Pandas?
+
+4️⃣ How do you extract **year/month/day** from datetime?
+
+5️⃣ Why are time-based features important for ML?
+
+6️⃣ What is the difference between **rolling mean and expanding mean**?
+
+---
+
+# 🚀 Summary
+
+| Concept | Purpose |
+|------|------|
+| `to_datetime()` | Convert strings to datetime |
+| `.dt.year` | Extract year |
+| `.dt.month` | Extract month |
+| `.dt.day` | Extract day |
+| `.dt.day_name()` | Extract weekday |
+| `resample()` | Change time frequency |
+| `rolling()` | Moving window statistics |
+| `expanding()` | Cumulative statistics |
+
+---
+
+# 🔜 Next Topic
+
+## 🔹 PHASE 7: Advanced Pandas for Machine Learning
+
+### 1️⃣5️⃣ Pivot Tables
+
+Topics include:
+
+```
+pivot()
+pivot_table()
+crosstab()
+```
+
+These tools help create **powerful data summaries used in EDA and feature engineering**.
