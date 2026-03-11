@@ -5393,3 +5393,521 @@ Expanding window
 ```
 
 These are **very important for time-series ML models and forecasting projects**.
+
+# 🔹 PHASE 5: Data Combining in Pandas
+
+In real-world **data science, AI, and machine learning projects**, data rarely exists in a single file.
+
+Instead, data is usually stored across **multiple datasets**, such as:
+
+- Customer information
+- Transactions
+- Products
+- Orders
+- Locations
+- Logs
+
+To analyze this data or build machine learning models, we must **combine datasets**.
+
+Pandas provides powerful tools for this:
+
+| Method | Purpose |
+|------|------|
+| `merge()` | Combine DataFrames using columns |
+| `join()` | Combine DataFrames using index |
+| `concat()` | Stack DataFrames vertically or horizontally |
+
+These operations are **critical for feature engineering and real-world ML pipelines**.
+
+---
+
+# 1️⃣3️⃣ Merging & Joining
+
+## What is Data Merging?
+
+Merging means **combining two or more datasets based on a common column**.
+
+This concept is identical to **SQL JOIN operations**.
+
+Example:
+
+### Employees Table
+
+| Employee_ID | Name | Department_ID |
+|---|---|---|
+| 1 | Aman | 101 |
+| 2 | Riya | 102 |
+| 3 | John | 101 |
+| 4 | Sara | 103 |
+
+### Departments Table
+
+| Department_ID | Department_Name |
+|---|---|
+| 101 | IT |
+| 102 | HR |
+| 104 | Finance |
+
+Goal:
+
+Combine both tables to get:
+
+| Name | Department |
+|-----|-----|
+| Aman | IT |
+| Riya | HR |
+
+This is done using **Pandas merge operations**.
+
+---
+
+# 🔹 Pandas `merge()` Function
+
+The `merge()` function is the **most powerful method for combining datasets**.
+
+### Syntax
+
+```python
+pd.merge(left_dataframe, right_dataframe, on="column", how="join_type")
+```
+
+### Parameters
+
+| Parameter | Description |
+|------|------|
+| `left` | First DataFrame |
+| `right` | Second DataFrame |
+| `on` | Column used to join datasets |
+| `how` | Type of join |
+
+---
+
+# 🔹 Types of Joins
+
+There are **four major types of joins**.
+
+| Join Type | Description |
+|------|------|
+| Inner Join | Only matching rows |
+| Left Join | All rows from left dataset |
+| Right Join | All rows from right dataset |
+| Outer Join | All rows from both datasets |
+
+---
+
+# Example Dataset
+
+```python
+import pandas as pd
+
+employees = pd.DataFrame({
+    "Employee_ID": [1,2,3,4],
+    "Name": ["Aman","Riya","John","Sara"],
+    "Department_ID": [101,102,101,103]
+})
+
+departments = pd.DataFrame({
+    "Department_ID": [101,102,104],
+    "Department_Name": ["IT","HR","Finance"]
+})
+```
+
+---
+
+# 🔹 1️⃣ Inner Join
+
+Inner join returns **only rows that exist in both datasets**.
+
+### Syntax
+
+```python
+pd.merge(employees, departments, on="Department_ID", how="inner")
+```
+
+### Result
+
+```
+Employee_ID  Name  Department_ID  Department_Name
+1            Aman      101           IT
+3            John      101           IT
+2            Riya      102           HR
+```
+
+Explanation:
+
+- Department 103 not present in departments
+- Department 104 not present in employees
+
+So those rows are removed.
+
+---
+
+# 🔹 2️⃣ Left Join
+
+Left join returns:
+
+- **All rows from left table**
+- Matching rows from right table
+
+### Syntax
+
+```python
+pd.merge(employees, departments, on="Department_ID", how="left")
+```
+
+### Result
+
+```
+Employee_ID  Name  Department_ID  Department_Name
+1            Aman      101           IT
+2            Riya      102           HR
+3            John      101           IT
+4            Sara      103           NaN
+```
+
+Explanation:
+
+Sara has **Department_ID 103**, but no matching department exists.
+
+So Pandas inserts **NaN**.
+
+---
+
+# 🔹 3️⃣ Right Join
+
+Right join returns:
+
+- **All rows from right dataset**
+- Matching rows from left dataset
+
+### Syntax
+
+```python
+pd.merge(employees, departments, on="Department_ID", how="right")
+```
+
+### Result
+
+```
+Employee_ID  Name  Department_ID  Department_Name
+1            Aman      101           IT
+3            John      101           IT
+2            Riya      102           HR
+NaN          NaN       104           Finance
+```
+
+Explanation:
+
+Finance department has **no employees**, so values become **NaN**.
+
+---
+
+# 🔹 4️⃣ Outer Join
+
+Outer join returns **all rows from both datasets**.
+
+Missing values become **NaN**.
+
+### Syntax
+
+```python
+pd.merge(employees, departments, on="Department_ID", how="outer")
+```
+
+### Result
+
+```
+Employee_ID  Name  Department_ID  Department_Name
+1            Aman      101           IT
+2            Riya      102           HR
+3            John      101           IT
+4            Sara      103           NaN
+NaN          NaN       104           Finance
+```
+
+---
+
+# 🔹 Visual Understanding of Joins
+
+```
+Inner Join
+    A ∩ B
+
+Left Join
+    All A + Matching B
+
+Right Join
+    All B + Matching A
+
+Outer Join
+    A ∪ B
+```
+
+---
+
+# 🔹 Merging on Different Column Names
+
+Sometimes columns have **different names**.
+
+Example:
+
+```
+customer_id
+user_id
+```
+
+Use:
+
+```python
+pd.merge(df1, df2, left_on="customer_id", right_on="user_id")
+```
+
+---
+
+# 🔹 Merging Multiple Columns
+
+You can merge using **multiple keys**.
+
+Example:
+
+```python
+pd.merge(df1, df2, on=["City","Date"])
+```
+
+---
+
+# 🔹 Handling Duplicate Keys
+
+If duplicate keys exist, Pandas creates **Cartesian product rows**.
+
+Example:
+
+```
+CustomerID
+1
+1
+```
+
+May produce **multiple rows after merge**.
+
+Always check:
+
+```python
+df.duplicated()
+```
+
+before merging.
+
+---
+
+# 🔹 Pandas `join()` Function
+
+`join()` is another way to combine DataFrames.
+
+It works primarily with **index-based merging**.
+
+### Syntax
+
+```python
+df1.join(df2)
+```
+
+### Example
+
+```python
+employees.join(
+    departments.set_index("Department_ID"),
+    on="Department_ID"
+)
+```
+
+This behaves like a **left join**.
+
+---
+
+# 🔹 Concatenation (`concat()`)
+
+Concatenation means **stacking datasets together**.
+
+It is useful when:
+
+- Combining multiple datasets
+- Appending new rows
+- Creating larger datasets
+
+### Syntax
+
+```python
+pd.concat([df1, df2])
+```
+
+---
+
+# 🔹 Row-wise Concatenation (Vertical)
+
+Combine datasets **top-to-bottom**.
+
+### Example
+
+```python
+df1 = pd.DataFrame({
+    "Name": ["Aman", "Riya"]
+})
+
+df2 = pd.DataFrame({
+    "Name": ["John", "Sara"]
+})
+
+pd.concat([df1, df2])
+```
+
+### Result
+
+```
+Name
+Aman
+Riya
+John
+Sara
+```
+
+---
+
+# 🔹 Column-wise Concatenation (Horizontal)
+
+Combine datasets **side-by-side**.
+
+### Example
+
+```python
+df1 = pd.DataFrame({
+    "Name": ["Aman","Riya"]
+})
+
+df2 = pd.DataFrame({
+    "Salary": [50000,60000]
+})
+
+pd.concat([df1, df2], axis=1)
+```
+
+### Result
+
+```
+Name   Salary
+Aman   50000
+Riya   60000
+```
+
+`axis=1` means **combine columns**.
+
+---
+
+# 🔹 Ignore Index Option
+
+When concatenating rows:
+
+```python
+pd.concat([df1, df2], ignore_index=True)
+```
+
+This resets row numbering.
+
+---
+
+# 🔥 Importance in Machine Learning
+
+Merging datasets is essential in ML workflows.
+
+Example pipeline:
+
+```
+Customer Dataset
+        +
+Transaction Dataset
+        +
+Product Dataset
+        ↓
+Merged Dataset
+        ↓
+Feature Engineering
+        ↓
+Machine Learning Model
+```
+
+Examples of features created:
+
+- Customer purchase frequency
+- Average order value
+- Total spending
+- Product preferences
+- Region-based demand
+
+---
+
+# ⚡ Performance Optimization Tips
+
+For large datasets:
+
+✔ Ensure join columns are indexed  
+
+```
+df.set_index("column")
+```
+
+✔ Remove unnecessary columns before merging  
+
+✔ Use categorical data types  
+
+✔ Avoid duplicate keys  
+
+✔ Use appropriate join type  
+
+---
+
+# 🎯 Interview Questions
+
+1️⃣ Difference between `merge()` and `join()`  
+
+2️⃣ Difference between **inner join and outer join**  
+
+3️⃣ When should we use `concat()` instead of `merge()`  
+
+4️⃣ What happens if merge keys are duplicated  
+
+5️⃣ How does Pandas handle missing values after merge  
+
+6️⃣ How to merge datasets with different column names  
+
+---
+
+# 🚀 Summary
+
+| Operation | Purpose |
+|------|------|
+| `merge()` | Combine DataFrames using columns |
+| `inner join` | Only matching rows |
+| `left join` | All rows from left dataset |
+| `right join` | All rows from right dataset |
+| `outer join` | All rows from both datasets |
+| `join()` | Merge using index |
+| `concat()` | Stack datasets vertically or horizontally |
+
+---
+
+# 🔜 Next Topic
+
+## 🔹 PHASE 6: Time Series Analysis
+
+### 1️⃣4️⃣ Working with Dates
+
+Topics include:
+
+- Datetime conversion
+- Extracting year/month/day
+- Weekday extraction
+- Resampling
+- Rolling windows
+- Expanding windows
+
+These concepts are **critical for time-series ML models such as sales forecasting, stock prediction, and demand forecasting**.
