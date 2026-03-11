@@ -6807,3 +6807,388 @@ Expanding mean
 ```
 
 These functions are **widely used in time-series ML models and financial data analysis**.
+# 1️⃣6️⃣ Window Functions in Pandas
+
+Window functions are powerful tools used to compute **statistics over a moving subset of data**.
+
+Instead of calculating values using the entire dataset, window functions operate on a **specific window (subset) of rows**.
+
+These are extremely important in:
+
+- Time-series analysis
+- Stock market prediction
+- Sales forecasting
+- Financial analytics
+- Feature engineering for ML
+
+Common window functions include:
+
+| Function | Purpose |
+|------|------|
+| Rolling Mean | Moving average |
+| Rolling Sum | Moving total |
+| Expanding Mean | Cumulative average |
+
+---
+
+# 🔹 What is a Window?
+
+A **window** refers to a subset of consecutive rows used for calculations.
+
+Example dataset:
+
+| Day | Sales |
+|----|----|
+| 1 | 100 |
+| 2 | 120 |
+| 3 | 130 |
+| 4 | 150 |
+| 5 | 170 |
+
+If the window size is **3**, calculations will be performed on **3 consecutive rows at a time**.
+
+---
+
+# 🔹 Rolling Window
+
+Rolling windows compute statistics using a **fixed-size sliding window**.
+
+Example window size = 3:
+
+```
+[100,120,130]
+   [120,130,150]
+      [130,150,170]
+```
+
+---
+
+# Rolling Mean (Moving Average)
+
+Rolling mean calculates the **average of values within the window**.
+
+This is commonly used in:
+
+- Stock price smoothing
+- Sales trend analysis
+- Signal processing
+- ML feature engineering
+
+---
+
+## Syntax
+
+```python
+df["column"].rolling(window_size).mean()
+```
+
+---
+
+## Example
+
+```python
+import pandas as pd
+
+data = {
+    "Sales": [100,120,130,150,170]
+}
+
+df = pd.DataFrame(data)
+
+df["Rolling_Mean"] = df["Sales"].rolling(3).mean()
+
+print(df)
+```
+
+Output
+
+```
+Sales  Rolling_Mean
+100      NaN
+120      NaN
+130     116.67
+150     133.33
+170     150.00
+```
+
+Explanation:
+
+Rolling average of the **last 3 values**.
+
+First two rows return **NaN** because a full window isn't available.
+
+---
+
+# 🔹 Rolling Sum
+
+Rolling sum calculates the **sum of values within the window**.
+
+This is useful for:
+
+- Total sales in recent days
+- Short-term financial metrics
+- Moving transaction totals
+
+---
+
+## Syntax
+
+```python
+df["column"].rolling(window_size).sum()
+```
+
+---
+
+## Example
+
+```python
+df["Rolling_Sum"] = df["Sales"].rolling(3).sum()
+```
+
+Output
+
+```
+Sales  Rolling_Sum
+100      NaN
+120      NaN
+130      350
+150      400
+170      450
+```
+
+Explanation:
+
+Example:
+
+```
+100 + 120 + 130 = 350
+```
+
+---
+
+# 🔹 Expanding Window
+
+Expanding windows compute statistics **from the beginning of the dataset up to the current row**.
+
+Unlike rolling windows, the window **keeps growing**.
+
+Example expanding windows:
+
+```
+[100]
+[100,120]
+[100,120,130]
+[100,120,130,150]
+```
+
+---
+
+# Expanding Mean
+
+Expanding mean calculates the **cumulative average**.
+
+---
+
+## Syntax
+
+```python
+df["column"].expanding().mean()
+```
+
+---
+
+## Example
+
+```python
+df["Expanding_Mean"] = df["Sales"].expanding().mean()
+```
+
+Output
+
+```
+Sales  Expanding_Mean
+100        100
+120        110
+130        116.67
+150        125
+170        134
+```
+
+Explanation:
+
+Mean calculated from **first value up to current value**.
+
+---
+
+# 🔹 Rolling vs Expanding
+
+| Feature | Rolling | Expanding |
+|------|------|------|
+| Window Size | Fixed | Growing |
+| Data Used | Recent values | Entire history |
+| Use Case | Short-term trends | Long-term trends |
+
+---
+
+# 🔹 Visualization Example
+
+Sales data:
+
+```
+100 120 130 150 170
+```
+
+Rolling mean (window=3):
+
+```
+NaN NaN 116 133 150
+```
+
+Expanding mean:
+
+```
+100 110 116 125 134
+```
+
+---
+
+# 🔥 Real Machine Learning Use Cases
+
+Window functions are used to create **powerful predictive features**.
+
+Examples:
+
+| Feature | Description |
+|------|------|
+| 7-day rolling sales | Recent demand trend |
+| 30-day rolling average | Monthly demand |
+| Expanding revenue mean | Overall performance trend |
+
+---
+
+# Example ML Feature Engineering
+
+```
+Sales Dataset
+      ↓
+Rolling Mean (7 days)
+      ↓
+Rolling Sum (30 days)
+      ↓
+Expanding Mean
+      ↓
+Machine Learning Model
+```
+
+---
+
+# 🔹 Advanced Rolling Operations
+
+Rolling windows support many statistics.
+
+Examples:
+
+### Rolling Minimum
+
+```python
+df["Sales"].rolling(3).min()
+```
+
+### Rolling Maximum
+
+```python
+df["Sales"].rolling(3).max()
+```
+
+### Rolling Standard Deviation
+
+```python
+df["Sales"].rolling(3).std()
+```
+
+---
+
+# 🔹 Handling Missing Values
+
+Rolling functions return **NaN for early rows**.
+
+You can fill them using:
+
+```python
+df.fillna(0)
+```
+
+or
+
+```python
+df["Rolling_Mean"].fillna(method="bfill")
+```
+
+---
+
+# 🔹 Window Functions with Time-Series Index
+
+These functions work best when the dataset has a **datetime index**.
+
+Example:
+
+```python
+df["Date"] = pd.to_datetime(df["Date"])
+
+df.set_index("Date", inplace=True)
+```
+
+Now rolling windows work correctly on **time-based data**.
+
+---
+
+# ⚡ Performance Tips
+
+✔ Use vectorized operations  
+
+✔ Avoid loops for moving calculations  
+
+✔ Use datetime index for time-series datasets  
+
+✔ Use appropriate window sizes  
+
+---
+
+# 🎯 Interview Questions
+
+1️⃣ What is a rolling window?
+
+2️⃣ Difference between rolling mean and expanding mean?
+
+3️⃣ Why do rolling functions return NaN?
+
+4️⃣ How are window functions used in time-series ML?
+
+5️⃣ What is the difference between rolling window and resampling?
+
+---
+
+# 🚀 Summary
+
+| Function | Purpose |
+|------|------|
+| `rolling().mean()` | Moving average |
+| `rolling().sum()` | Moving total |
+| `expanding().mean()` | Cumulative average |
+
+---
+
+# 🔜 Next Topic
+
+## 🔹 PHASE 7: Performance Optimization
+
+Topics include:
+
+```
+Vectorization
+Avoid loops
+Memory usage optimization
+Using categorical data
+```
+
+These techniques help **speed up Pandas operations on large datasets**.
