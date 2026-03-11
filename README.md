@@ -6360,3 +6360,450 @@ crosstab()
 ```
 
 These tools help create **powerful data summaries used in EDA and feature engineering**.
+# 🔹 PHASE 7: Advanced Pandas for Machine Learning
+
+Advanced Pandas operations help transform raw datasets into **structured insights for machine learning**.
+
+One of the most powerful tools for **data summarization and analysis** is the **Pivot Table**.
+
+Pivot tables help to:
+
+- Summarize large datasets
+- Perform aggregation
+- Compare multiple categories
+- Prepare features for ML models
+- Perform Exploratory Data Analysis (EDA)
+
+Pandas provides three powerful functions:
+
+| Function | Purpose |
+|------|------|
+| `pivot()` | Reshape data |
+| `pivot_table()` | Aggregate and summarize data |
+| `crosstab()` | Frequency table for categorical variables |
+
+---
+
+# 1️⃣5️⃣ Pivot Tables in Pandas
+
+Pivot tables allow you to **reorganize and summarize datasets**.
+
+They work similarly to **Excel Pivot Tables**.
+
+Example dataset:
+
+| Name | Department | Gender | Salary |
+|-----|-----|-----|-----|
+| Aman | IT | M | 50000 |
+| Riya | HR | F | 60000 |
+| John | IT | M | 55000 |
+| Sara | HR | F | 65000 |
+
+Goal:
+
+Find **average salary by department and gender**.
+
+---
+
+# 🔹 1️⃣ `pivot()`
+
+`pivot()` reshapes the data by turning **unique values from one column into new columns**.
+
+It **does NOT perform aggregation**.
+
+---
+
+## Syntax
+
+```python
+df.pivot(index, columns, values)
+```
+
+| Parameter | Meaning |
+|------|------|
+| index | Rows |
+| columns | Columns |
+| values | Data values |
+
+---
+
+## Example Dataset
+
+```python
+import pandas as pd
+
+data = {
+    "Date": ["2024-01","2024-01","2024-02","2024-02"],
+    "Product": ["Laptop","Phone","Laptop","Phone"],
+    "Sales": [1000,500,1200,700]
+}
+
+df = pd.DataFrame(data)
+print(df)
+```
+
+Dataset
+
+```
+Date     Product  Sales
+2024-01  Laptop   1000
+2024-01  Phone     500
+2024-02  Laptop   1200
+2024-02  Phone     700
+```
+
+---
+
+## Using `pivot()`
+
+```python
+df.pivot(index="Date", columns="Product", values="Sales")
+```
+
+Output
+
+```
+Product   Laptop   Phone
+Date
+2024-01    1000      500
+2024-02    1200      700
+```
+
+Explanation:
+
+- `Date` becomes row index
+- `Product` becomes columns
+- `Sales` becomes values
+
+---
+
+# Important Limitation of `pivot()`
+
+Pivot requires **unique combinations of index and column values**.
+
+If duplicates exist, Pandas raises an error.
+
+Example duplicate case:
+
+```
+Date Product Sales
+2024-01 Laptop 1000
+2024-01 Laptop 1200
+```
+
+Solution: Use **pivot_table() instead**.
+
+---
+
+# 🔹 2️⃣ `pivot_table()`
+
+`pivot_table()` is a **more powerful version of pivot()**.
+
+It allows:
+
+- Aggregation
+- Duplicate handling
+- Multiple functions
+
+---
+
+## Syntax
+
+```python
+pd.pivot_table(
+    df,
+    values="column",
+    index="row",
+    columns="column",
+    aggfunc="function"
+)
+```
+
+---
+
+## Example Dataset
+
+```python
+data = {
+    "Department": ["IT","IT","HR","HR","Finance"],
+    "Gender": ["M","F","M","F","F"],
+    "Salary": [50000,60000,55000,65000,70000]
+}
+
+df = pd.DataFrame(data)
+```
+
+Dataset
+
+```
+Department Gender Salary
+IT         M      50000
+IT         F      60000
+HR         M      55000
+HR         F      65000
+Finance    F      70000
+```
+
+---
+
+## Average Salary by Department and Gender
+
+```python
+pd.pivot_table(
+    df,
+    values="Salary",
+    index="Department",
+    columns="Gender",
+    aggfunc="mean"
+)
+```
+
+Output
+
+```
+Gender        F        M
+Department
+Finance    70000     NaN
+HR         65000    55000
+IT         60000    50000
+```
+
+---
+
+# Multiple Aggregation Functions
+
+You can compute multiple statistics.
+
+```python
+pd.pivot_table(
+    df,
+    values="Salary",
+    index="Department",
+    aggfunc=["mean","sum","count"]
+)
+```
+
+Output
+
+```
+           mean   sum   count
+Department
+Finance   70000 70000    1
+HR        60000 120000   2
+IT        55000 110000   2
+```
+
+---
+
+# Filling Missing Values
+
+Use `fill_value`.
+
+```python
+pd.pivot_table(
+    df,
+    values="Salary",
+    index="Department",
+    columns="Gender",
+    fill_value=0
+)
+```
+
+---
+
+# Adding Totals
+
+Use `margins=True`.
+
+```python
+pd.pivot_table(
+    df,
+    values="Salary",
+    index="Department",
+    columns="Gender",
+    margins=True
+)
+```
+
+This adds **overall totals**.
+
+---
+
+# 🔹 3️⃣ Crosstab
+
+`crosstab()` is used to compute **frequency tables**.
+
+It is especially useful for **categorical data analysis**.
+
+---
+
+## Syntax
+
+```python
+pd.crosstab(row_variable, column_variable)
+```
+
+---
+
+## Example Dataset
+
+```python
+data = {
+    "Gender": ["M","F","M","F","F","M"],
+    "Purchased": ["Yes","No","Yes","Yes","No","Yes"]
+}
+
+df = pd.DataFrame(data)
+```
+
+Dataset
+
+```
+Gender Purchased
+M      Yes
+F      No
+M      Yes
+F      Yes
+F      No
+M      Yes
+```
+
+---
+
+## Crosstab Example
+
+```python
+pd.crosstab(df["Gender"], df["Purchased"])
+```
+
+Output
+
+```
+Purchased   No   Yes
+Gender
+F           2     1
+M           0     3
+```
+
+Explanation:
+
+Counts occurrences of each combination.
+
+---
+
+# Normalized Crosstab (Percentage)
+
+```python
+pd.crosstab(
+    df["Gender"],
+    df["Purchased"],
+    normalize=True
+)
+```
+
+Returns **probability distribution**.
+
+---
+
+# Adding Margins
+
+```python
+pd.crosstab(
+    df["Gender"],
+    df["Purchased"],
+    margins=True
+)
+```
+
+Adds **totals row and column**.
+
+---
+
+# Pivot vs Pivot Table vs Crosstab
+
+| Function | Purpose |
+|------|------|
+| `pivot()` | Reshape data |
+| `pivot_table()` | Aggregate and summarize |
+| `crosstab()` | Frequency table |
+
+---
+
+# 🔥 Importance in Machine Learning
+
+Pivot tables help with **EDA and feature engineering**.
+
+Examples:
+
+| Use Case | Example |
+|------|------|
+| Sales analysis | Sales by region |
+| Customer analysis | Purchases by gender |
+| Marketing | Campaign response rate |
+| Product analysis | Sales by category |
+
+Example ML pipeline:
+
+```
+Raw Dataset
+      ↓
+Data Cleaning
+      ↓
+Pivot Analysis
+      ↓
+Feature Engineering
+      ↓
+Machine Learning Model
+```
+
+---
+
+# ⚡ Performance Tips
+
+✔ Use `pivot_table()` when duplicates exist  
+
+✔ Use categorical data types for large datasets  
+
+✔ Avoid large pivot tables with too many categories  
+
+✔ Use `fill_value` to avoid missing values  
+
+---
+
+# 🎯 Interview Questions
+
+1️⃣ Difference between `pivot()` and `pivot_table()`  
+
+2️⃣ When should we use `crosstab()`?  
+
+3️⃣ Why does `pivot()` fail with duplicate values?  
+
+4️⃣ How do you add totals to a pivot table?  
+
+5️⃣ How do you calculate percentage distribution using crosstab?
+
+---
+
+# 🚀 Summary
+
+| Concept | Purpose |
+|------|------|
+| `pivot()` | Reshape data |
+| `pivot_table()` | Aggregated pivot table |
+| `crosstab()` | Frequency table |
+
+---
+
+# 🔜 Next Topic
+
+## 1️⃣6️⃣ Window Functions
+
+Important topics:
+
+```
+Rolling mean
+Rolling sum
+Expanding mean
+```
+
+These functions are **widely used in time-series ML models and financial data analysis**.
