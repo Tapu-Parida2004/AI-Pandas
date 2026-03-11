@@ -7192,3 +7192,12 @@ Using categorical data
 ```
 
 These techniques help **speed up Pandas operations on large datasets**.
+1️⃣7️⃣ Performance Optimization
+
+Vectorization
+
+Avoid loops
+
+Memory usage optimization
+
+Using categorical data
