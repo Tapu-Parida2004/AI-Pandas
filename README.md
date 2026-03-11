@@ -4356,3 +4356,321 @@ We will learn:
 These operations are core to feature engineering in Machine Learning.
 
 If you want, I can also help you build a 🔥 visually beautiful GitHub README (with badges, diagrams, collapsible sections, and navigation) so your Pandas notes look like a professional open-source documentation project.
+---
+# 1️⃣1️⃣ Apply & Lambda in Pandas
+
+In real-world **data preprocessing** and **machine learning workflows**, we often need to transform or modify data values.
+
+Pandas provides powerful functions for this:
+
+- `.apply()`
+- `.map()`
+- `.applymap()`
+- `lambda functions`
+
+These allow us to apply **custom logic to columns, rows, or entire DataFrames**.
+
+---
+
+# 🔹 1️⃣ `.apply()`
+
+`.apply()` is used to apply a **function to a column or row**.
+
+It is commonly used for **feature transformation in ML pipelines**.
+
+## Syntax
+
+```python
+df["column"].apply(function)
+```
+
+---
+
+## Example Dataset
+
+```python
+import pandas as pd
+
+data = {
+    "Salary": [30000, 40000, 50000]
+}
+
+df = pd.DataFrame(data)
+
+print(df)
+```
+
+### Output
+
+```
+   Salary
+0  30000
+1  40000
+2  50000
+```
+
+---
+
+## Example: Convert Salary to Thousands
+
+```python
+df["Salary_K"] = df["Salary"].apply(lambda x: x / 1000)
+
+print(df)
+```
+
+### Output
+
+```
+   Salary  Salary_K
+0  30000     30.0
+1  40000     40.0
+2  50000     50.0
+```
+
+---
+
+## Example: Using Custom Function
+
+```python
+def categorize_salary(x):
+    if x > 40000:
+        return "High"
+    else:
+        return "Low"
+
+df["Category"] = df["Salary"].apply(categorize_salary)
+
+print(df)
+```
+
+### Output
+
+```
+   Salary Category
+0  30000    Low
+1  40000    Low
+2  50000    High
+```
+
+---
+
+# 🔹 2️⃣ `.map()`
+
+`.map()` is used to **map values of a Series to new values**.
+
+It is typically used for:
+
+- Encoding categorical variables
+- Replacing values
+
+## Syntax
+
+```python
+df["column"].map(dictionary)
+```
+
+---
+
+## Example
+
+```python
+data = {
+    "Gender": ["M", "F", "F", "M"]
+}
+
+df = pd.DataFrame(data)
+
+gender_map = {
+    "M": "Male",
+    "F": "Female"
+}
+
+df["Gender"] = df["Gender"].map(gender_map)
+
+print(df)
+```
+
+### Output
+
+```
+   Gender
+0   Male
+1   Female
+2   Female
+3   Male
+```
+
+---
+
+## Using Lambda with `.map()`
+
+```python
+df["Salary_K"] = df["Salary"].map(lambda x: x / 1000)
+```
+
+---
+
+# 🔹 3️⃣ `.applymap()`
+
+`.applymap()` applies a function to **every element of a DataFrame**.
+
+Unlike `.apply()`, which works on **rows or columns**, `.applymap()` works on **individual cells**.
+
+---
+
+## Example
+
+```python
+data = {
+    "A": [1, 2],
+    "B": [3, 4]
+}
+
+df = pd.DataFrame(data)
+
+df = df.applymap(lambda x: x * 10)
+
+print(df)
+```
+
+### Output
+
+```
+    A   B
+0  10  30
+1  20  40
+```
+
+---
+
+# 🔹 4️⃣ Lambda Functions
+
+A **lambda function** is a small anonymous function.
+
+It allows writing **short functions in one line**.
+
+## Syntax
+
+```python
+lambda arguments: expression
+```
+
+---
+
+## Example
+
+```python
+df["Salary_K"] = df["Salary"].apply(lambda x: x / 1000)
+```
+
+Meaning:
+
+```
+Take value x
+Divide it by 1000
+Return result
+```
+
+---
+
+## Another Example
+
+```python
+df["Age_Group"] = df["Age"].apply(lambda x: "Adult" if x > 18 else "Minor")
+```
+
+### Output
+
+```
+   Age Age_Group
+0  22    Adult
+1  15    Minor
+```
+
+---
+
+# 🔥 Real ML Use Cases
+
+These functions are commonly used in **data preprocessing pipelines**.
+
+| Task | Example |
+|-----|------|
+| Feature scaling | Convert salary to thousands |
+| Encoding | Male → 1, Female → 0 |
+| Feature engineering | Create Age groups |
+| Data cleaning | Modify text or numbers |
+
+Example ML workflow:
+
+```
+Raw Dataset
+      ↓
+Data Cleaning
+      ↓
+Feature Transformation
+      ↓
+Feature Engineering
+      ↓
+Model Training
+```
+
+---
+
+# ⚡ Performance Tip
+
+For large datasets:
+
+- Prefer **vectorized operations**
+- Avoid heavy use of `.apply()` loops
+
+Example (faster):
+
+```python
+df["Salary_K"] = df["Salary"] / 1000
+```
+
+---
+
+# 🎯 Interview Questions
+
+1️⃣ Difference between `.apply()` and `.map()`  
+
+2️⃣ When should `.applymap()` be used?  
+
+3️⃣ What is a lambda function?  
+
+4️⃣ Why is `.map()` useful for categorical encoding?  
+
+5️⃣ Is `.apply()` faster than vectorized operations?
+
+---
+
+# 🚀 Summary
+
+| Function | Use Case |
+|------|------|
+| `.apply()` | Apply function to rows or columns |
+| `.map()` | Map values of a Series |
+| `.applymap()` | Apply function to every DataFrame element |
+| `lambda` | Short anonymous functions |
+
+---
+
+# 🔜 Next Topic
+
+## 1️⃣2️⃣ GroupBy (VERY IMPORTANT FOR ML)
+
+Topics covered next:
+
+```
+groupby()
+mean()
+sum()
+count()
+agg()
+multiple aggregations
+transform vs aggregate
+```
+
+This is **one of the most important Pandas topics for Data Science and Machine Learning.**
